@@ -53,7 +53,9 @@ public abstract class ApiRequest<T extends ApiResponse> {
    *
    * @return
    */
-  public abstract DataType getDataType();
+  public DataType getDataType() {
+    return DataType.XML;
+  }
 
   /**
    * 获取返回对象类型
