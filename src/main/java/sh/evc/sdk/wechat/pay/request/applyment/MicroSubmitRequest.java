@@ -3,6 +3,7 @@ package sh.evc.sdk.wechat.pay.request.applyment;
 import sh.evc.sdk.wechat.pay.dict.DataType;
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
 import sh.evc.sdk.wechat.pay.response.applyment.MicroSubmitResponse;
+import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
 
   @Override
-  public Map<String, String> getRequestParams() {
+  public ParamsMap getRequestParams() {
     return null;
   }
 

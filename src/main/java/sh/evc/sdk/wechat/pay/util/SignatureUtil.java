@@ -8,19 +8,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sh.evc.sdk.wechat.pay.Const;
 import sh.evc.sdk.wechat.pay.dict.SignType;
-import sh.evc.sdk.wechat.pay.domain.PayNotify;
 
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
-import java.security.SecureRandom;
+import java.security.NoSuchAlgorithmException;
 import java.security.Security;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 微信支付工具
@@ -66,15 +70,13 @@ public class SignatureUtil {
       throw new RuntimeException(errorString, e);
     }
     if (newMaxKeyLength < 256) {
-      throw new RuntimeException(errorString); // hack failed
+      // hack failed
+      throw new RuntimeException(errorString);
     }
 
     //添加PKCS7Padding支持
     Security.addProvider(new BouncyCastleProvider());
   }
-
-  private static final String SYMBOLS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  private static final Random RANDOM = new SecureRandom();
 
   /**
    * 使用商户后台APIv3密钥来解密
@@ -160,9 +162,8 @@ public class SignatureUtil {
    * @param key      API密钥
    * @param signType
    * @return 签名是否正确
-   * @throws Exception
    */
-  public static boolean isSignatureValid(Map<String, String> respData, String key, SignType signType) throws Exception {
+  public static boolean isValid(ParamsMap respData, String key, SignType signType) {
 
     //如果没有sign字段那么就是不需要验证签名，直接过
     if (!respData.containsKey(Const.FIELD_SIGN)) {
@@ -175,7 +176,7 @@ public class SignatureUtil {
       signType = SignType.find(respData.get(Const.FIELD_SIGN_TYPE));
     }
 
-    return generateSignature(respData, key, signType).equals(sign);
+    return generate(respData, key, signType).equals(sign);
   }
 
   /**
@@ -184,10 +185,9 @@ public class SignatureUtil {
    * @param data
    * @param key
    * @return
-   * @throws Exception
    */
-  public static String generateSignature(final Map<String, String> data, String key) throws Exception {
-    return generateSignature(data, key, null);
+  public static String generate(final ParamsMap data, String key) {
+    return generate(data, key, null);
   }
 
   /**
@@ -198,17 +198,19 @@ public class SignatureUtil {
    * @param signType 签名方式
    * @return 签名
    */
-  public static String generateSignature(final Map<String, String> data, String key, SignType signType) throws Exception {
+  public static String generate(final ParamsMap data, String key, SignType signType) {
     Set<String> keySet = data.keySet();
-    String[] keyArray = keySet.toArray(new String[keySet.size()]);
+    String[] keyArray = keySet.toArray(new String[0]);
     Arrays.sort(keyArray);
     StringBuilder sb = new StringBuilder();
     for (String k : keyArray) {
       if (k.equals(Const.FIELD_SIGN)) {
         continue;
       }
-      if (data.get(k).trim().length() > 0) // 参数值为空，则不参与签名
+      // 参数值为空，则不参与签名
+      if (data.get(k).trim().length() > 0) {
         sb.append(k).append("=").append(data.get(k).trim()).append("&");
+      }
     }
     sb.append("key=").append(key);
 
@@ -217,26 +219,20 @@ public class SignatureUtil {
     if (type != null) {
       signType = SignType.find(type);
     }
-    if (SignType.MD5 == signType) {
-      return MD5(sb.toString()).toUpperCase(); //转成大写
-    } else if (SignType.HMACSHA256 == signType) {
-      return HMACSHA256(sb.toString(), key);
-    } else {
-      throw new Exception(String.format("Invalid sign_type: %s", signType));
-    }
-  }
 
-  /**
-   * 获取随机字符串 Nonce Str
-   *
-   * @return String 随机字符串
-   */
-  public static String generateNonceStr() {
-    char[] nonceChars = new char[32];
-    for (int index = 0; index < nonceChars.length; ++index) {
-      nonceChars[index] = SYMBOLS.charAt(RANDOM.nextInt(SYMBOLS.length()));
+    try {
+      if (SignType.MD5 == signType) {
+        //转成大写
+        return MD5(sb.toString()).toUpperCase();
+      } else if (SignType.HMACSHA256 == signType) {
+        return HMACSHA256(sb.toString(), key);
+      } else {
+        log.error("sign_type无法识别{}", signType);
+      }
+    } catch (NoSuchAlgorithmException | UnsupportedEncodingException | InvalidKeyException e) {
+      log.error(ErrorUtil.getStackTraceAsString(e));
     }
-    return new String(nonceChars);
+    return null;
   }
 
   /**
@@ -244,13 +240,15 @@ public class SignatureUtil {
    *
    * @param data 待处理数据
    * @return MD5结果
+   * @throws NoSuchAlgorithmException
+   * @throws UnsupportedEncodingException
    */
-  public static String MD5(String data) throws Exception {
+  public static String MD5(String data) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     MessageDigest md = MessageDigest.getInstance("MD5");
     byte[] array = md.digest(data.getBytes("UTF-8"));
     StringBuilder sb = new StringBuilder();
     for (byte item : array) {
-      sb.append(Integer.toHexString((item & 0xFF) | 0x100).substring(1, 3));
+      sb.append(Integer.toHexString((item & 0xFF) | 0x100), 1, 3);
     }
     return sb.toString().toUpperCase();
   }
@@ -258,19 +256,21 @@ public class SignatureUtil {
   /**
    * 生成 HMACSHA256
    *
-   * @param data 待处理数据
-   * @param key  密钥
-   * @return 加密结果
-   * @throws Exception
+   * @param data
+   * @param key
+   * @return
+   * @throws NoSuchAlgorithmException
+   * @throws UnsupportedEncodingException
+   * @throws InvalidKeyException
    */
-  public static String HMACSHA256(String data, String key) throws Exception {
+  public static String HMACSHA256(String data, String key) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
     Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
     SecretKeySpec secret_key = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
     sha256_HMAC.init(secret_key);
     byte[] array = sha256_HMAC.doFinal(data.getBytes("UTF-8"));
     StringBuilder sb = new StringBuilder();
     for (byte item : array) {
-      sb.append(Integer.toHexString((item & 0xFF) | 0x100).substring(1, 3));
+      sb.append(Integer.toHexString((item & 0xFF) | 0x100), 1, 3);
     }
     return sb.toString().toUpperCase();
   }
@@ -279,31 +279,8 @@ public class SignatureUtil {
    * 主函数
    *
    * @param args
-   * @throws Exception
    */
-  public static void main(String[] args) throws Exception {
-    String xml = "<xml><appid><![CDATA[wxc41ba77c696fb673]]></appid>\n" +
-            "<attach><![CDATA[云峦足球场]]></attach>\n" +
-            "<bank_type><![CDATA[CCB_CREDIT]]></bank_type>\n" +
-            "<cash_fee><![CDATA[2500]]></cash_fee>\n" +
-            "<device_info><![CDATA[BOSS207]]></device_info>\n" +
-            "<fee_type><![CDATA[CNY]]></fee_type>\n" +
-            "<is_subscribe><![CDATA[N]]></is_subscribe>\n" +
-            "<mch_id><![CDATA[1516531731]]></mch_id>\n" +
-            "<nonce_str><![CDATA[PWiQUqI3mQnV4lMXBlj3QI0FLlahDdd4]]></nonce_str>\n" +
-            "<openid><![CDATA[oGimf4qeCWxq27fkhLPkyF6fs85M]]></openid>\n" +
-            "<out_trade_no><![CDATA[G207U8014P2021012008382933]]></out_trade_no>\n" +
-            "<result_code><![CDATA[SUCCESS]]></result_code>\n" +
-            "<return_code><![CDATA[SUCCESS]]></return_code>\n" +
-            "<sign><![CDATA[F997A5924987BBF1B63E9B46A3944AA17E43DB1A63209909EEBE8E3E86B0644D]]></sign>\n" +
-            "<time_end><![CDATA[20210120083837]]></time_end>\n" +
-            "<total_fee>2500</total_fee>\n" +
-            "<trade_type><![CDATA[JSAPI]]></trade_type>\n" +
-            "<transaction_id><![CDATA[4200000845202101207738856295]]></transaction_id>\n" +
-            "</xml>";
-    PayNotify notify = SerializeUtil.xmlToBean(xml, PayNotify.class);
-    log.info(notify.toString());
-    log.info(SerializeUtil.beanToXml(notify));
+  public static void main(String[] args) {
 
 //    String a = "adfasdfasdfsd";
 //    String key = "adasdfasdfsadfasdfsdf";

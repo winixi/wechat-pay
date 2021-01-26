@@ -1,14 +1,19 @@
 package sh.evc.sdk.wechat.pay.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 /**
  * 付款通知
  *
  * @author winixi
  * @date 2021/1/22 2:47 PM
  */
+@JacksonXmlRootElement(localName = "xml")
 public class PayNotify {
 
-  private String appid;
+  @JsonProperty("appid")
+  private String appId;
   private String attach;
   private String bankType;
   private String cashFee;
@@ -27,12 +32,12 @@ public class PayNotify {
   private String tradeType;
   private String transactionId;
 
-  public String getAppid() {
-    return appid;
+  public String getAppId() {
+    return appId;
   }
 
-  public void setAppid(String appid) {
-    this.appid = appid;
+  public void setAppId(String appId) {
+    this.appId = appId;
   }
 
   public String getAttach() {
@@ -174,7 +179,7 @@ public class PayNotify {
   @Override
   public String toString() {
     return "PayNotify{" +
-            "appid='" + appid + '\'' +
+            "appId='" + appId + '\'' +
             ", attach='" + attach + '\'' +
             ", bankType='" + bankType + '\'' +
             ", cashFee='" + cashFee + '\'' +

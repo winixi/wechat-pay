@@ -16,7 +16,7 @@ public class Const {
   public static final String FIELD_SIGN_TYPE = "sign_type";
 
   public static final String REFUND_SUCCESS_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-  public static final String PAY_TIME_END_FORMAT = "yyyyMMddHHmmss";
+  public static final String PAY_TIME_FORMAT = "yyyyMMddHHmmss";
   public static final String TRANSFER_PAYMENT_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 }

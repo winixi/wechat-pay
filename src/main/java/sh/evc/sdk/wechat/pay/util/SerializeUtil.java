@@ -24,6 +24,9 @@ public class SerializeUtil {
    * Bean转JSON字符串.
    */
   public static String beanToJson(Object object) {
+    if (object == null) {
+      return null;
+    }
     return delegate.beanToJson(object);
   }
 

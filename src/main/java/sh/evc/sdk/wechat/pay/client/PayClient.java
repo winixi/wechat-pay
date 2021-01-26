@@ -2,14 +2,14 @@ package sh.evc.sdk.wechat.pay.client;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sh.evc.sdk.wechat.pay.Const;
 import sh.evc.sdk.wechat.pay.config.PayConfig;
+import sh.evc.sdk.wechat.pay.dict.DataType;
 import sh.evc.sdk.wechat.pay.dict.RequestMethod;
 import sh.evc.sdk.wechat.pay.handler.ResponseHandler;
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
 import sh.evc.sdk.wechat.pay.response.ApiResponse;
-import sh.evc.sdk.wechat.pay.util.ErrorUtil;
-import sh.evc.sdk.wechat.pay.util.HttpRequest;
-import sh.evc.sdk.wechat.pay.util.JsonUtil;
+import sh.evc.sdk.wechat.pay.util.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,8 +45,10 @@ public class PayClient {
    */
   public <T extends ApiResponse> T execute(ApiRequest<T> request) {
     RequestMethod method = request.getMethod();
-    String url = request.getApiModule().getUrl() + request.getUri();
-    String body = request.getRequestBody();
+    String url = Const.SERVER_URL + request.getUri();
+    ParamsMap params = request.getRequestParams();
+    DataType dataType = request.getDataType();
+    String body = getRequestBody(method, dataType, params);
     Date requestTime = new Date();
     String res;
     if (request.useCert()) {
@@ -57,8 +59,15 @@ public class PayClient {
       res = this.request.request(method, url, body, null);
     }
 
-    T response = JsonUtil.toObject(res, request.getResponseClass());
+    T response;
+    if (dataType== DataType.XML) {
+      response = SerializeUtil.xmlToBean(res, request.getResponseClass());
+    } else {
+      response = SerializeUtil.jsonToBean(res, request.getResponseClass());
+    }
+
     response.setReqUrl(url);
+    response.setRequestParams(params);
     response.setMethod(request.getMethod());
     response.setRequestTime(requestTime);
     response.setResponseTime(new Date());
@@ -67,6 +76,27 @@ public class PayClient {
 
     handler.append(response);
     return response;
+  }
+
+  /**
+   * json化所有参数
+   *
+   * @return
+   */
+  private String getRequestBody(RequestMethod method, DataType dataType, ParamsMap params) {
+    if (method == RequestMethod.GET) {
+      return "";
+    }
+    if (params == null || params.isEmpty()) {
+      return "";
+    }
+    if (dataType == DataType.JSON) {
+      return SerializeUtil.beanToJson(params);
+    } else {
+      params.put("nonce_str", NonceStrUtil.generate());
+      params.put("sign", SignatureUtil.generate(params, config.getApiKey()));
+      return SerializeUtil.beanToXml(params);
+    }
   }
 
   /**

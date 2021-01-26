@@ -1,6 +1,7 @@
 package sh.evc.sdk.wechat.pay.response;
 
 import sh.evc.sdk.wechat.pay.dict.RequestMethod;
+import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 import java.util.Date;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class ApiResponse {
   private RequestMethod method;
   private Date requestTime;
   private Date responseTime;
-  private Map<String, String> requestParams;
+  private ParamsMap requestParams;
   private String requestBody;
   private String responseBody;
 
@@ -57,7 +58,7 @@ public class ApiResponse {
     return requestParams;
   }
 
-  public void setRequestParams(Map<String, String> requestParams) {
+  public void setRequestParams(ParamsMap requestParams) {
     this.requestParams = requestParams;
   }
 

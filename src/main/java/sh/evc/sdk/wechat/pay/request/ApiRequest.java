@@ -3,10 +3,8 @@ package sh.evc.sdk.wechat.pay.request;
 import sh.evc.sdk.wechat.pay.dict.DataType;
 import sh.evc.sdk.wechat.pay.dict.RequestMethod;
 import sh.evc.sdk.wechat.pay.response.ApiResponse;
-import sh.evc.sdk.wechat.pay.util.SerializeUtil;
+import sh.evc.sdk.wechat.pay.util.ParamsMap;
 import sh.evc.sdk.wechat.pay.util.StringUtil;
-
-import java.util.Map;
 
 /**
  * api request
@@ -21,7 +19,7 @@ public abstract class ApiRequest<T extends ApiResponse> {
    *
    * @return
    */
-  public abstract Map<String, String> getRequestParams();
+  public abstract ParamsMap getRequestParams();
 
   /**
    * 是否使用证书
@@ -73,7 +71,7 @@ public abstract class ApiRequest<T extends ApiResponse> {
     if (getMethod() == RequestMethod.POST) {
       return "";
     }
-    Map<String, String> params = getRequestParams();
+    ParamsMap params = getRequestParams();
     if (params == null || params.isEmpty()) {
       return "";
     }
@@ -93,23 +91,4 @@ public abstract class ApiRequest<T extends ApiResponse> {
     return sb.toString();
   }
 
-  /**
-   * json化所有参数
-   *
-   * @return
-   */
-  public String getRequestBody() {
-    if (this.getMethod() == RequestMethod.GET) {
-      return "";
-    }
-    Map<String, String> params = getRequestParams();
-    if (params == null || params.isEmpty()) {
-      return "";
-    }
-    if (getDataType() == DataType.JSON) {
-      return SerializeUtil.beanToJson(params);
-    } else {
-      return SerializeUtil.beanToXml(params);
-    }
-  }
 }
