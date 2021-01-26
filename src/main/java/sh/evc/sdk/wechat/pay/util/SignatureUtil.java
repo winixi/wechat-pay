@@ -221,13 +221,10 @@ public class SignatureUtil {
     }
 
     try {
-      if (SignType.MD5 == signType) {
-        //转成大写
-        return MD5(sb.toString()).toUpperCase();
-      } else if (SignType.HMACSHA256 == signType) {
+      if (SignType.HMACSHA256 == signType) {
         return HMACSHA256(sb.toString(), key);
       } else {
-        log.error("sign_type无法识别{}", signType);
+        return MD5(sb.toString()).toUpperCase();
       }
     } catch (NoSuchAlgorithmException | UnsupportedEncodingException | InvalidKeyException e) {
       log.error(ErrorUtil.getStackTraceAsString(e));
