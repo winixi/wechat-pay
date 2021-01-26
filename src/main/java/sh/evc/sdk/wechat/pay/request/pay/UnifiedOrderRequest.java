@@ -264,7 +264,9 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
     params.add("sub_openid", subOpenId);
     params.add("receipt", receipt);
     params.add("profit_sharing", profitSharing);
-    params.add("scene_info", SerializeUtil.beanToJson(sceneInfo));
+    if (sceneInfo != null) {
+      params.add("scene_info", "{\"store_info\":" + SerializeUtil.beanToJson(sceneInfo) + "}");
+    }
     return params;
   }
 
