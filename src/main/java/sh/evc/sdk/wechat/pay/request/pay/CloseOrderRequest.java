@@ -2,16 +2,16 @@ package sh.evc.sdk.wechat.pay.request.pay;
 
 import sh.evc.sdk.wechat.pay.dict.SignType;
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
-import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
+import sh.evc.sdk.wechat.pay.response.pay.CloseOrderResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 订单查询
+ * 关闭订单
  *
  * @author winixi
- * @date 2021/1/26 4:45 PM
+ * @date 2021/1/27 1:48 PM
  */
-public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
+public class CloseOrderRequest extends ApiRequest<CloseOrderResponse> {
 
   /**
    * 服务商的APPID
@@ -32,11 +32,6 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
    * 子商户号
    */
   private String subMchId;
-
-  /**
-   * 微信订单号
-   */
-  private String transactionId;
 
   /**
    * 商户订单号
@@ -64,10 +59,6 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
     this.subMchId = subMchId;
   }
 
-  public void setTransactionId(String transactionId) {
-    this.transactionId = transactionId;
-  }
-
   public void setOutTradeNo(String outTradeNo) {
     this.outTradeNo = outTradeNo;
   }
@@ -77,16 +68,18 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
   }
 
   /**
-   * 构造
+   * 必填
    *
    * @param appId
    * @param mchId
    * @param subMchId
+   * @param outTradeNo
    */
-  public OrderQueryRequest(String appId, String mchId, String subMchId) {
+  public CloseOrderRequest(String appId, String mchId, String subMchId, String outTradeNo) {
     this.appId = appId;
     this.mchId = mchId;
     this.subMchId = subMchId;
+    this.outTradeNo = outTradeNo;
   }
 
   @Override
@@ -96,7 +89,6 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
     params.add("sub_appid", subAppId);
     params.add("mch_id", mchId);
     params.add("sub_mch_id", subMchId);
-    params.add("transaction_id", transactionId);
     params.add("out_trade_no", outTradeNo);
     params.add("sign_type", signType.getName());
     return params;
@@ -104,11 +96,11 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
 
   @Override
   public String getUri() {
-    return "/pay/orderquery";
+    return "/pay/closeorder";
   }
 
   @Override
-  public Class<OrderQueryResponse> getResponseClass() {
-    return OrderQueryResponse.class;
+  public Class<CloseOrderResponse> getResponseClass() {
+    return CloseOrderResponse.class;
   }
 }

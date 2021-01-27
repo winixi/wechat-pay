@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import sh.evc.sdk.wechat.pay.dict.FeeType;
 import sh.evc.sdk.wechat.pay.dict.TradeState;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
-import sh.evc.sdk.wechat.pay.domain.CouponType;
+import sh.evc.sdk.wechat.pay.dict.CouponType;
 import sh.evc.sdk.wechat.pay.response.XmlResponse;
 
 /**
@@ -130,20 +130,20 @@ public class OrderQueryResponse extends XmlResponse {
   /**
    * 代金劵id
    */
-  @JsonProperty("coupon_id_1")
-  private String couponId1;
+  @JsonProperty("coupon_id_0")
+  private String couponId0;
 
   /**
    * 代金劵类型
    */
-  @JsonProperty("coupon_type_1")
-  private CouponType couponType1;
+  @JsonProperty("coupon_type_0")
+  private CouponType couponType0;
 
   /**
    * 代金劵金额
    */
-  @JsonProperty("coupon_fee_1")
-  private Integer couponFee1;
+  @JsonProperty("coupon_fee_0")
+  private Integer couponFee0;
 
   /**
    * 微信支付订单号
@@ -347,28 +347,28 @@ public class OrderQueryResponse extends XmlResponse {
     this.couponCount = couponCount;
   }
 
-  public String getCouponId1() {
-    return couponId1;
+  public String getCouponId0() {
+    return couponId0;
   }
 
-  public void setCouponId1(String couponId1) {
-    this.couponId1 = couponId1;
+  public void setCouponId0(String couponId0) {
+    this.couponId0 = couponId0;
   }
 
-  public CouponType getCouponType1() {
-    return couponType1;
+  public CouponType getCouponType0() {
+    return couponType0;
   }
 
-  public void setCouponType1(CouponType couponType1) {
-    this.couponType1 = couponType1;
+  public void setCouponType0(CouponType couponType0) {
+    this.couponType0 = couponType0;
   }
 
-  public Integer getCouponFee1() {
-    return couponFee1;
+  public Integer getCouponFee0() {
+    return couponFee0;
   }
 
-  public void setCouponFee1(Integer couponFee1) {
-    this.couponFee1 = couponFee1;
+  public void setCouponFee0(Integer couponFee0) {
+    this.couponFee0 = couponFee0;
   }
 
   public String getTransactionId() {
@@ -436,9 +436,9 @@ public class OrderQueryResponse extends XmlResponse {
             ", cashFeeType=" + cashFeeType +
             ", couponFee=" + couponFee +
             ", couponCount=" + couponCount +
-            ", couponId1='" + couponId1 + '\'' +
-            ", couponType1=" + couponType1 +
-            ", couponFee1=" + couponFee1 +
+            ", couponId0='" + couponId0 + '\'' +
+            ", couponType0=" + couponType0 +
+            ", couponFee0=" + couponFee0 +
             ", transactionId='" + transactionId + '\'' +
             ", outTradeNo='" + outTradeNo + '\'' +
             ", attach='" + attach + '\'' +

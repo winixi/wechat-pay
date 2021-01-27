@@ -2,16 +2,16 @@ package sh.evc.sdk.wechat.pay.request.pay;
 
 import sh.evc.sdk.wechat.pay.dict.SignType;
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
-import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
+import sh.evc.sdk.wechat.pay.response.pay.RefundQueryResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 订单查询
+ * 查询退款
  *
  * @author winixi
- * @date 2021/1/26 4:45 PM
+ * @date 2021/1/27 3:11 PM
  */
-public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
+public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
 
   /**
    * 服务商的APPID
@@ -44,6 +44,22 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
   private String outTradeNo;
 
   /**
+   * 商户退款单号
+   */
+  private String outRefundNo;
+
+  /**
+   * 退款id
+   */
+  private String refundId;
+
+  /**
+   * 偏移量
+   * 偏移量，当部分退款次数超过10次时可使用，表示返回的查询结果从这个偏移量开始取记录
+   */
+  private Integer offset;
+
+  /**
    * 签名类型
    */
   private SignType signType = SignType.MD5;
@@ -72,18 +88,30 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
     this.outTradeNo = outTradeNo;
   }
 
+  public void setOutRefundNo(String outRefundNo) {
+    this.outRefundNo = outRefundNo;
+  }
+
+  public void setRefundId(String refundId) {
+    this.refundId = refundId;
+  }
+
+  public void setOffset(Integer offset) {
+    this.offset = offset;
+  }
+
   public void setSignType(SignType signType) {
     this.signType = signType;
   }
 
   /**
-   * 构造
+   * 必填
    *
    * @param appId
    * @param mchId
    * @param subMchId
    */
-  public OrderQueryRequest(String appId, String mchId, String subMchId) {
+  public RefundQueryRequest(String appId, String mchId, String subMchId) {
     this.appId = appId;
     this.mchId = mchId;
     this.subMchId = subMchId;
@@ -98,17 +126,20 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
     params.add("sub_mch_id", subMchId);
     params.add("transaction_id", transactionId);
     params.add("out_trade_no", outTradeNo);
+    params.add("out_refund_no", outRefundNo);
+    params.add("refund_id", refundId);
     params.add("sign_type", signType.getName());
+    params.add("offset", String.valueOf(offset));
     return params;
   }
 
   @Override
   public String getUri() {
-    return "/pay/orderquery";
+    return "/pay/refundquery";
   }
 
   @Override
-  public Class<OrderQueryResponse> getResponseClass() {
-    return OrderQueryResponse.class;
+  public Class<RefundQueryResponse> getResponseClass() {
+    return RefundQueryResponse.class;
   }
 }

@@ -1,17 +1,18 @@
 package sh.evc.sdk.wechat.pay.request.pay;
 
+import sh.evc.sdk.wechat.pay.dict.FeeType;
 import sh.evc.sdk.wechat.pay.dict.SignType;
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
-import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
+import sh.evc.sdk.wechat.pay.response.pay.RefundResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 订单查询
+ * 退款
  *
  * @author winixi
- * @date 2021/1/26 4:45 PM
+ * @date 2021/1/27 2:45 PM
  */
-public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
+public class RefundRequest extends ApiRequest<RefundResponse> {
 
   /**
    * 服务商的APPID
@@ -44,9 +45,34 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
   private String outTradeNo;
 
   /**
+   * 商户退款单号
+   */
+  private String outRefundNo;
+
+  /**
+   * 订单金额
+   */
+  private Integer totalFee;
+
+  /**
+   * 退款金额
+   */
+  private Integer refundFee;
+
+  /**
+   * 货币类型
+   */
+  private FeeType refundFeeType;
+
+  /**
+   * 退款原因
+   */
+  private String refundDesc;
+
+  /**
    * 签名类型
    */
-  private SignType signType = SignType.MD5;
+  private SignType signType = SignType.HMACSHA256;
 
   public void setAppId(String appId) {
     this.appId = appId;
@@ -72,21 +98,47 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
     this.outTradeNo = outTradeNo;
   }
 
+  public void setOutRefundNo(String outRefundNo) {
+    this.outRefundNo = outRefundNo;
+  }
+
+  public void setTotalFee(Integer totalFee) {
+    this.totalFee = totalFee;
+  }
+
+  public void setRefundFee(Integer refundFee) {
+    this.refundFee = refundFee;
+  }
+
+  public void setRefundFeeType(FeeType refundFeeType) {
+    this.refundFeeType = refundFeeType;
+  }
+
+  public void setRefundDesc(String refundDesc) {
+    this.refundDesc = refundDesc;
+  }
+
   public void setSignType(SignType signType) {
     this.signType = signType;
   }
 
   /**
-   * 构造
+   * 必填
    *
    * @param appId
    * @param mchId
    * @param subMchId
+   * @param outRefundNo
+   * @param totalFee
+   * @param refundFee
    */
-  public OrderQueryRequest(String appId, String mchId, String subMchId) {
+  public RefundRequest(String appId, String mchId, String subMchId, String outRefundNo, Integer totalFee, Integer refundFee) {
     this.appId = appId;
     this.mchId = mchId;
     this.subMchId = subMchId;
+    this.outRefundNo = outRefundNo;
+    this.totalFee = totalFee;
+    this.refundFee = refundFee;
   }
 
   @Override
@@ -99,16 +151,21 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
     params.add("transaction_id", transactionId);
     params.add("out_trade_no", outTradeNo);
     params.add("sign_type", signType.getName());
+    params.add("out_refund_no", outRefundNo);
+    params.add("total_fee", String.valueOf(totalFee));
+    params.add("refund_fee", String.valueOf(refundFee));
+    params.add("refund_fee_type", refundFeeType.name());
+    params.add("refund_desc", refundDesc);
     return params;
   }
 
   @Override
   public String getUri() {
-    return "/pay/orderquery";
+    return "/secapi/pay/refund";
   }
 
   @Override
-  public Class<OrderQueryResponse> getResponseClass() {
-    return OrderQueryResponse.class;
+  public Class<RefundResponse> getResponseClass() {
+    return RefundResponse.class;
   }
 }

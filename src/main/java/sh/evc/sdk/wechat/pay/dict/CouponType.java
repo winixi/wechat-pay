@@ -1,4 +1,4 @@
-package sh.evc.sdk.wechat.pay.domain;
+package sh.evc.sdk.wechat.pay.dict;
 
 /**
  * 代金劵类型
