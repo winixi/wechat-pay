@@ -1,28 +1,30 @@
-package sh.evc.sdk.wechat.pay.response.pay;
+package sh.evc.sdk.wechat.pay.notify;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import sh.evc.sdk.wechat.pay.dict.CouponType;
 import sh.evc.sdk.wechat.pay.dict.FeeType;
 import sh.evc.sdk.wechat.pay.dict.TradeState;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
-import sh.evc.sdk.wechat.pay.dict.CouponType;
 import sh.evc.sdk.wechat.pay.response.XmlResponse;
 
 /**
- * 订单查询
+ * 付款通知
  *
  * @author winixi
- * @date 2021/1/26 4:45 PM
+ * @date 2021/1/22 2:47 PM
  */
-public class OrderQueryResponse extends XmlResponse {
+@JacksonXmlRootElement(localName = "xml")
+public class PayNotify extends XmlResponse {
 
   /**
-   * 服务商的APPID
+   * 服务商的appId
    */
   @JsonProperty("appid")
   private String appId;
 
   /**
-   * 子商户公众账号ID
+   * 子商户公众账号id
    */
   @JsonProperty("sub_appid")
   private String subAppId;
@@ -167,11 +169,6 @@ public class OrderQueryResponse extends XmlResponse {
    * yyyyMMddHHmmss
    */
   private String timeEnd;
-
-  /**
-   * 交易状态描述
-   */
-  private String tradeStateDesc;
 
   public String getAppId() {
     return appId;
@@ -405,17 +402,9 @@ public class OrderQueryResponse extends XmlResponse {
     this.timeEnd = timeEnd;
   }
 
-  public String getTradeStateDesc() {
-    return tradeStateDesc;
-  }
-
-  public void setTradeStateDesc(String tradeStateDesc) {
-    this.tradeStateDesc = tradeStateDesc;
-  }
-
   @Override
   public String toString() {
-    return "OrderQueryResponse{" +
+    return "PayNotify{" +
             "appId='" + appId + '\'' +
             ", subAppId='" + subAppId + '\'' +
             ", mchId='" + mchId + '\'' +
@@ -445,7 +434,6 @@ public class OrderQueryResponse extends XmlResponse {
             ", outTradeNo='" + outTradeNo + '\'' +
             ", attach='" + attach + '\'' +
             ", timeEnd='" + timeEnd + '\'' +
-            ", tradeStateDesc='" + tradeStateDesc + '\'' +
             "} " + super.toString();
   }
 }

@@ -1,15 +1,17 @@
-package sh.evc.sdk.wechat.pay.response.pay;
+package sh.evc.sdk.wechat.pay.notify;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import sh.evc.sdk.wechat.pay.response.XmlResponse;
 
 /**
- * 关闭订单
+ * 退款通知
  *
  * @author winixi
- * @date 2021/1/27 1:41 PM
+ * @date 2021/1/27 3:22 PM
  */
-public class CloseOrderResponse extends XmlResponse {
+@JacksonXmlRootElement(localName = "xml")
+public class RefundNotify extends XmlResponse {
 
   /**
    * 服务商的APPID
@@ -42,6 +44,11 @@ public class CloseOrderResponse extends XmlResponse {
    * 签名
    */
   private String sign;
+
+  /**
+   * 加密信息
+   */
+  private String reqInfo;
 
   public String getAppId() {
     return appId;
@@ -91,15 +98,24 @@ public class CloseOrderResponse extends XmlResponse {
     this.sign = sign;
   }
 
+  public String getReqInfo() {
+    return reqInfo;
+  }
+
+  public void setReqInfo(String reqInfo) {
+    this.reqInfo = reqInfo;
+  }
+
   @Override
   public String toString() {
-    return "CloseOrderResponse{" +
+    return "RefundNotify{" +
             "appId='" + appId + '\'' +
             ", subAppId='" + subAppId + '\'' +
             ", mchId='" + mchId + '\'' +
             ", subMchId='" + subMchId + '\'' +
             ", nonceStr='" + nonceStr + '\'' +
             ", sign='" + sign + '\'' +
-            '}';
+            ", reqInfo='" + reqInfo + '\'' +
+            "} " + super.toString();
   }
 }

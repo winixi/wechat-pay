@@ -74,6 +74,11 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
    */
   private SignType signType = SignType.HMACSHA256;
 
+  /**
+   * 通知地址
+   */
+  private String notifyUrl;
+
   public void setAppId(String appId) {
     this.appId = appId;
   }
@@ -122,6 +127,10 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
     this.signType = signType;
   }
 
+  public void setNotifyUrl(String notifyUrl) {
+    this.notifyUrl = notifyUrl;
+  }
+
   /**
    * 必填
    *
@@ -156,6 +165,7 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
     params.add("refund_fee", String.valueOf(refundFee));
     params.add("refund_fee_type", refundFeeType.name());
     params.add("refund_desc", refundDesc);
+    params.add("notify_url", notifyUrl);
     return params;
   }
 

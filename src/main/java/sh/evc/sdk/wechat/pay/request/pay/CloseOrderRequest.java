@@ -1,5 +1,6 @@
 package sh.evc.sdk.wechat.pay.request.pay;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import sh.evc.sdk.wechat.pay.dict.SignType;
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
 import sh.evc.sdk.wechat.pay.response.pay.CloseOrderResponse;

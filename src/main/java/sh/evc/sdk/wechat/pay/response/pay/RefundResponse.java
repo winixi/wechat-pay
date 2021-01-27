@@ -16,11 +16,13 @@ public class RefundResponse extends XmlResponse {
   /**
    * 服务商的APPID
    */
+  @JsonProperty("appid")
   private String appId;
 
   /**
    * 子商户公众账号ID
    */
+  @JsonProperty("sub_appid")
   private String subAppId;
 
   /**

@@ -19,15 +19,15 @@ public class UnifiedOrderResponse extends XmlResponse {
   private String appId;
 
   /**
-   * 商户号
-   */
-  private String mchId;
-
-  /**
    * 子商户应用ID
    */
   @JsonProperty("sub_appid")
   private String subAppId;
+
+  /**
+   * 商户号
+   */
+  private String mchId;
 
   /**
    * 子商户号
