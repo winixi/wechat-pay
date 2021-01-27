@@ -1,8 +1,5 @@
 # wechat-pay
-微信支付SDK  
-XML服务商版本
----
-# 说明
+
 简化业务代码中关于微信支付的逻辑，抽象微信支付sdk for 服务商
 
 # 配置  
@@ -50,6 +47,3 @@ public void unifiedOrder() {
   }
 ```
 
-# 联系人  
-
-winixi@qq.com
