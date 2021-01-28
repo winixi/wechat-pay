@@ -3,8 +3,10 @@ package sh.evc.sdk.wechat.pay;
 import org.junit.Test;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.request.pay.OrderQueryRequest;
+import sh.evc.sdk.wechat.pay.request.pay.ProfitSharingMerchantRatioQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.UnifiedOrderRequest;
 import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
+import sh.evc.sdk.wechat.pay.response.pay.ProfitSharingMerchantRatioQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.UnifiedOrderResponse;
 import sh.evc.sdk.wechat.pay.util.JsonFormat;
 import sh.evc.sdk.wechat.pay.util.NonceStrUtil;
@@ -49,6 +51,17 @@ public class PayClientTest extends BaseTest {
     request.setSubAppId(config.getSubAppId());
     request.setOutTradeNo("1111111");
     OrderQueryResponse response = client.execute(request);
+    JsonFormat.print(response);
+  }
+
+  /**
+   * 查询最大分账比例
+   */
+  @Test
+  public void ProfitSharingMerchantRatioQuery() {
+    ProfitSharingMerchantRatioQueryRequest request = new ProfitSharingMerchantRatioQueryRequest(config.getMchId());
+    request.setSubMchId(config.getSubMchId());
+    ProfitSharingMerchantRatioQueryResponse response = client.execute(request);
     JsonFormat.print(response);
   }
 }

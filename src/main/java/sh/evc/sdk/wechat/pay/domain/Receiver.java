@@ -34,6 +34,19 @@ public class Receiver {
    */
   private String description;
 
+  /**
+   * 可选项，在接收方类型为个人的时可选填，若有值，会检查与 name 是否实名匹配，不匹配会拒绝分账请求
+   * 1、分账接收方类型是PERSONAL_OPENID时，是个人姓名（选传，传则校验）
+   */
+  private String name;
+
+  public Receiver(ReceiverType type, String account, Integer amount, String description) {
+    this.type = type;
+    this.account = account;
+    this.amount = amount;
+    this.description = description;
+  }
+
   public ReceiverType getType() {
     return type;
   }
@@ -66,6 +79,14 @@ public class Receiver {
     this.description = description;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   @Override
   public String toString() {
     return "Receiver{" +
@@ -73,6 +94,7 @@ public class Receiver {
             ", account='" + account + '\'' +
             ", amount=" + amount +
             ", description='" + description + '\'' +
+            ", name='" + name + '\'' +
             '}';
   }
 }

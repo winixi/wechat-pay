@@ -1,9 +1,9 @@
-package sh.evc.sdk.wechat.pay.request.pay;
+package sh.evc.sdk.wechat.pay.request.secapi;
 
 import sh.evc.sdk.wechat.pay.dict.FeeType;
 import sh.evc.sdk.wechat.pay.dict.SignType;
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
-import sh.evc.sdk.wechat.pay.response.pay.RefundResponse;
+import sh.evc.sdk.wechat.pay.response.secapi.RefundResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**

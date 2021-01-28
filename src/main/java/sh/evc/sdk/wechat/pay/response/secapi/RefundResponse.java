@@ -1,4 +1,4 @@
-package sh.evc.sdk.wechat.pay.response.pay;
+package sh.evc.sdk.wechat.pay.response.secapi;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import sh.evc.sdk.wechat.pay.dict.CouponType;
