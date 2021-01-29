@@ -48,7 +48,8 @@ public class PayClient {
     String url = Const.SERVER_URL + request.getUri();
     ParamsMap params = request.getRequestParams();
     DataType dataType = request.getDataType();
-    String body = getRequestBody(method, dataType, params);
+    boolean useNonce = request.useNonce();
+    String body = getRequestBody(method, dataType, params, useNonce);
     Date requestTime = new Date();
     String res;
     if (request.useCert()) {
@@ -81,20 +82,26 @@ public class PayClient {
   /**
    * json化所有参数
    *
+   * @param method
+   * @param dataType
+   * @param params
+   * @param useNonce
    * @return
    */
-  private String getRequestBody(RequestMethod method, DataType dataType, ParamsMap params) {
+  private String getRequestBody(RequestMethod method, DataType dataType, ParamsMap params, boolean useNonce) {
     if (method == RequestMethod.GET) {
       return "";
     }
     if (params == null || params.isEmpty()) {
       return "";
     }
+    if (useNonce) {
+      params.put("nonce_str", NonceStrUtil.generate());
+    }
+    params.put("sign", SignatureUtil.generate(params, config.getApiKey()));
     if (dataType == DataType.JSON) {
       return SerializeUtil.beanToJson(params);
     } else {
-      params.put("nonce_str", NonceStrUtil.generate());
-      params.put("sign", SignatureUtil.generate(params, config.getApiKey()));
       return SerializeUtil.beanToXml(params);
     }
   }

@@ -31,6 +31,15 @@ public abstract class ApiRequest<T extends ApiResponse> {
   }
 
   /**
+   * 使用nonceStr
+   *
+   * @return
+   */
+  public boolean useNonce() {
+    return true;
+  }
+
+  /**
    * 获取接口地址
    *
    * @return

@@ -1,19 +1,19 @@
 package sh.evc.sdk.wechat.pay.request.secapi;
 
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
-import sh.evc.sdk.wechat.pay.response.secapi.MchConfigQueryResponse;
+import sh.evc.sdk.wechat.pay.response.secapi.MchConfigAppIdResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 配置查询
+ * 绑定appId配置
  *
  * @author winixi
- * @date 2021/1/29 11:46 AM
+ * @date 2021/1/29 1:59 PM
  */
-public class MchConfigQueryRequest extends ApiRequest<MchConfigQueryResponse> {
+public class MchConfigAppIdRequest extends ApiRequest<MchConfigAppIdResponse> {
 
   /**
-   * 服务商的APPID
+   * 公众账号appId
    */
   private String appId;
 
@@ -23,9 +23,14 @@ public class MchConfigQueryRequest extends ApiRequest<MchConfigQueryResponse> {
   private String mchId;
 
   /**
-   * 子商户号
+   * 小微商户号
    */
   private String subMchId;
+
+  /**
+   * 关联appId
+   */
+  private String subAppId;
 
   /**
    * 必填
@@ -33,11 +38,13 @@ public class MchConfigQueryRequest extends ApiRequest<MchConfigQueryResponse> {
    * @param appId
    * @param mchId
    * @param subMchId
+   * @param subAppId
    */
-  public MchConfigQueryRequest(String appId, String mchId, String subMchId) {
+  public MchConfigAppIdRequest(String appId, String mchId, String subMchId, String subAppId) {
     this.appId = appId;
     this.mchId = mchId;
     this.subMchId = subMchId;
+    this.subAppId = subAppId;
   }
 
   public void setAppId(String appId) {
@@ -52,13 +59,8 @@ public class MchConfigQueryRequest extends ApiRequest<MchConfigQueryResponse> {
     this.subMchId = subMchId;
   }
 
-  @Override
-  public ParamsMap getRequestParams() {
-    ParamsMap params = new ParamsMap();
-    params.add("appid", appId);
-    params.add("mch_id", mchId);
-    params.add("sub_mch_id", subMchId);
-    return params;
+  public void setSubAppId(String subAppId) {
+    this.subAppId = subAppId;
   }
 
   @Override
@@ -67,12 +69,22 @@ public class MchConfigQueryRequest extends ApiRequest<MchConfigQueryResponse> {
   }
 
   @Override
-  public String getUri() {
-    return "/secapi/mch/querysubdevconfig";
+  public ParamsMap getRequestParams() {
+    ParamsMap params = new ParamsMap();
+    params.add("appid", appId);
+    params.add("mch_id", mchId);
+    params.add("sub_mch_id", subMchId);
+    params.add("sub_appid", subAppId);
+    return params;
   }
 
   @Override
-  public Class<MchConfigQueryResponse> getResponseClass() {
-    return MchConfigQueryResponse.class;
+  public String getUri() {
+    return "/secapi/mch/addsubdevconfig";
+  }
+
+  @Override
+  public Class<MchConfigAppIdResponse> getResponseClass() {
+    return MchConfigAppIdResponse.class;
   }
 }
