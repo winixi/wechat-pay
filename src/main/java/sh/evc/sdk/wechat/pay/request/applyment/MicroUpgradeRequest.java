@@ -1,16 +1,16 @@
 package sh.evc.sdk.wechat.pay.request.applyment;
 
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
-import sh.evc.sdk.wechat.pay.response.applyment.MicroSubmitResponse;
+import sh.evc.sdk.wechat.pay.response.applyment.MicroUpgradeResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 小微商户入驻
+ * 小微升级
  *
  * @author winixi
- * @date 2021/1/21 3:44 PM
+ * @date 2021/1/29 4:49 PM
  */
-public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
+public class MicroUpgradeRequest extends ApiRequest<MicroUpgradeResponse> {
 
   @Override
   public ParamsMap getRequestParams() {
@@ -20,12 +20,11 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
 
   @Override
   public String getUri() {
-    return "/applyment/micro/submit";
+    return "/applyment/micro/submitupgrade";
   }
 
   @Override
-  public Class<MicroSubmitResponse> getResponseClass() {
-    return MicroSubmitResponse.class;
+  public Class<MicroUpgradeResponse> getResponseClass() {
+    return MicroUpgradeResponse.class;
   }
 }
-
