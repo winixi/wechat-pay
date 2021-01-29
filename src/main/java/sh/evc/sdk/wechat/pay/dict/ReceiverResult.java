@@ -17,7 +17,7 @@ public enum ReceiverResult {
    * 分账成功
    */
   SUCCESS,
-  
+
   /**
    * 分账失败已关闭
    */

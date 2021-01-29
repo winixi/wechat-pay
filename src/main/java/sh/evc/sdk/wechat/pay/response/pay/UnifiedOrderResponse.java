@@ -50,21 +50,6 @@ public class UnifiedOrderResponse extends XmlResponse {
   private String sign;
 
   /**
-   * 业务结果
-   */
-  private String resultCode;
-
-  /**
-   * 错误代码
-   */
-  private String errCode;
-
-  /**
-   * 错误代码描述
-   */
-  private String errCodeDes;
-
-  /**
    * 交易类型
    */
   private TradeType tradeType;
@@ -135,36 +120,6 @@ public class UnifiedOrderResponse extends XmlResponse {
     this.sign = sign;
   }
 
-  @Override
-  public String getResultCode() {
-    return resultCode;
-  }
-
-  @Override
-  public void setResultCode(String resultCode) {
-    this.resultCode = resultCode;
-  }
-
-  @Override
-  public String getErrCode() {
-    return errCode;
-  }
-
-  @Override
-  public void setErrCode(String errCode) {
-    this.errCode = errCode;
-  }
-
-  @Override
-  public String getErrCodeDes() {
-    return errCodeDes;
-  }
-
-  @Override
-  public void setErrCodeDes(String errCodeDes) {
-    this.errCodeDes = errCodeDes;
-  }
-
   public TradeType getTradeType() {
     return tradeType;
   }
@@ -199,9 +154,6 @@ public class UnifiedOrderResponse extends XmlResponse {
             ", deviceInfo='" + deviceInfo + '\'' +
             ", nonceStr='" + nonceStr + '\'' +
             ", sign='" + sign + '\'' +
-            ", resultCode='" + resultCode + '\'' +
-            ", errCode='" + errCode + '\'' +
-            ", errCodeDes='" + errCodeDes + '\'' +
             ", tradeType=" + tradeType +
             ", prepayId='" + prepayId + '\'' +
             ", codeUrl='" + codeUrl + '\'' +

@@ -1,5 +1,6 @@
 package sh.evc.sdk.wechat.pay.util;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import sh.evc.sdk.wechat.pay.util.serialize.JacksonSerialize;
 import sh.evc.sdk.wechat.pay.util.serialize.SerializeDelegate;
 
@@ -18,6 +19,10 @@ public class SerializeUtil {
    */
   public static <T> T jsonToBean(String json, Class<T> clazz) {
     return delegate.jsonToBean(json, clazz);
+  }
+
+  public static <T> T jsonToBean(String json, TypeReference type) {
+    return delegate.jsonToBean(json, type);
   }
 
   /**

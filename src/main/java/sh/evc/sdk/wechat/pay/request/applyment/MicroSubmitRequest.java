@@ -5,8 +5,6 @@ import sh.evc.sdk.wechat.pay.request.ApiRequest;
 import sh.evc.sdk.wechat.pay.response.applyment.MicroSubmitResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
-import java.util.Map;
-
 /**
  * 小微商户入驻
  *

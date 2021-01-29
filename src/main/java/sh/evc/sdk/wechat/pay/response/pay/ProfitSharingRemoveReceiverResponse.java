@@ -1,7 +1,9 @@
 package sh.evc.sdk.wechat.pay.response.pay;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import sh.evc.sdk.wechat.pay.domain.ReceiverRemove;
 import sh.evc.sdk.wechat.pay.response.XmlResponse;
+import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 
 /**
  * 删除分账接收方
@@ -80,10 +82,6 @@ public class ProfitSharingRemoveReceiverResponse extends XmlResponse {
     this.subAppId = subAppId;
   }
 
-  public String getReceiver() {
-    return receiver;
-  }
-
   public void setReceiver(String receiver) {
     this.receiver = receiver;
   }
@@ -102,6 +100,10 @@ public class ProfitSharingRemoveReceiverResponse extends XmlResponse {
 
   public void setSign(String sign) {
     this.sign = sign;
+  }
+
+  public ReceiverRemove getReceiver() {
+    return SerializeUtil.jsonToBean(receiver, ReceiverRemove.class);
   }
 
   @Override

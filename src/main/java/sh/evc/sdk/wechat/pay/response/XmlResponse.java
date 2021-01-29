@@ -1,5 +1,8 @@
 package sh.evc.sdk.wechat.pay.response;
 
+import sh.evc.sdk.wechat.pay.dict.ResultCode;
+import sh.evc.sdk.wechat.pay.dict.ReturnCode;
+
 /**
  * xml response
  *
@@ -14,7 +17,7 @@ public class XmlResponse extends ApiResponse {
    * <p>
    * 此字段是通信标识，非交易标识，交易是否成功需要查看result_code来判断
    */
-  private String returnCode;
+  private ReturnCode returnCode;
 
   /**
    * 返回信息，如非空，为错误原因
@@ -26,11 +29,11 @@ public class XmlResponse extends ApiResponse {
 
   /**
    * 业务结果
-   *
+   * <p>
    * SUCCESS：分账申请接收成功，结果通过分账查询接口查询
    * FAIL ：提交业务失败
    */
-  private String resultCode;
+  private ResultCode resultCode;
 
   /**
    * 错误代码
@@ -45,11 +48,11 @@ public class XmlResponse extends ApiResponse {
    */
   private String errCodeDes;
 
-  public String getReturnCode() {
+  public ReturnCode getReturnCode() {
     return returnCode;
   }
 
-  public void setReturnCode(String returnCode) {
+  public void setReturnCode(ReturnCode returnCode) {
     this.returnCode = returnCode;
   }
 
@@ -61,11 +64,11 @@ public class XmlResponse extends ApiResponse {
     this.returnMsg = returnMsg;
   }
 
-  public String getResultCode() {
+  public ResultCode getResultCode() {
     return resultCode;
   }
 
-  public void setResultCode(String resultCode) {
+  public void setResultCode(ResultCode resultCode) {
     this.resultCode = resultCode;
   }
 

@@ -2,28 +2,28 @@
 
 简化业务代码中关于微信支付的逻辑，抽象微信支付sdk for 服务商
 
-# 配置  
+# 配置
 
->测试代码配置文件  
+> 测试代码配置文件  
 src/test/resources/config.properties
 
->服务商配置  
+> 服务商配置  
 appId=  
 apiKey=  
 aesKey=  
-mchId=  
+mchId=
 
->特约商户  
+> 特约商户  
 subAppId=  
-subMchId=  
+subMchId=
 
->通知  
+> 通知  
 payNotify=http://balabalala.cn:9090/wechat-pay/payNotify  
 refundNotify=http://balabalala.cn:9090/wechat-pay/refundNotify  
-profitNotify=http://balabalala.cn:9090/wechat-pay/profitNotify  
-
+profitNotify=http://balabalala.cn:9090/wechat-pay/profitNotify
 
 # 代码示例
+
 ```
 /**
  * 统一下单
@@ -46,18 +46,22 @@ public void unifiedOrder() {
     JsonFormat.print(response);
   }
 ```
+
 # 已实现接口列表
 
-* 统一下单
-* 订单查询
-* 关闭订单
-* 退款
-* 退款查询  
+* 支付
+    * 统一下单
+    * 订单查询
+    * 关闭订单
+    * 退款
+    * 退款查询
 
+* 分账
+    * 查询订单最大分账比例
+    * 添加分账接收方
+    * 删除分账接收方
+    * 请求单次分账
+    * 查询分账结果
 
-* 查询订单最大分账比例
-* 添加分账接收方
-* 删除分账接收方
-* 请求单次分账
-* 查询分账结果
+* 进件  
 

@@ -1,6 +1,7 @@
 package sh.evc.sdk.wechat.pay.util.serialize;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -49,6 +50,17 @@ public class JacksonSerialize implements SerializeDelegate {
       result = OBJECT_MAPPER.readValue(new ByteArrayInputStream(json.getBytes(UTF_8)), clazz);
     } catch (IOException e) {
       LOGGER.error("Convert json to bean " + clazz.getName() + " error.", e);
+    }
+    return result;
+  }
+
+  @Override
+  public <T> T jsonToBean(String json, TypeReference type) {
+    T result = null;
+    try {
+      result = OBJECT_MAPPER.readValue(new ByteArrayInputStream(json.getBytes(UTF_8)), type);
+    } catch (IOException e) {
+      LOGGER.error("Convert json to bean " + type.toString() + " error.", e);
     }
     return result;
   }

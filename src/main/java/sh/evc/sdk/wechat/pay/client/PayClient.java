@@ -60,7 +60,7 @@ public class PayClient {
     }
 
     T response;
-    if (dataType== DataType.XML) {
+    if (dataType == DataType.XML) {
       response = SerializeUtil.xmlToBean(res, request.getResponseClass());
     } else {
       response = SerializeUtil.jsonToBean(res, request.getResponseClass());

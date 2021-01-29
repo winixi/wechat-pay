@@ -1,10 +1,10 @@
 package sh.evc.sdk.wechat.pay.response.pay;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import sh.evc.sdk.wechat.pay.dict.CouponType;
 import sh.evc.sdk.wechat.pay.dict.FeeType;
 import sh.evc.sdk.wechat.pay.dict.TradeState;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
-import sh.evc.sdk.wechat.pay.dict.CouponType;
 import sh.evc.sdk.wechat.pay.response.XmlResponse;
 
 /**

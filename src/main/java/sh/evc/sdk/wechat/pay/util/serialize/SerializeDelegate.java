@@ -1,5 +1,7 @@
 package sh.evc.sdk.wechat.pay.util.serialize;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 /**
  * 微信交互数据序列化代理实现接口.不同的序列化需要实现该接口.
  *
@@ -12,6 +14,8 @@ public interface SerializeDelegate {
    * JSON字符串转Bean.
    */
   <T> T jsonToBean(String json, Class<T> clazz);
+
+  <T> T jsonToBean(String json, TypeReference type);
 
   /**
    * Bean转JSON字符串.

@@ -24,6 +24,9 @@ public class ReceiverRemove {
    */
   private String account;
 
+  public ReceiverRemove() {
+  }
+
   public ReceiverRemove(ReceiverType type, String account) {
     this.type = type;
     this.account = account;
