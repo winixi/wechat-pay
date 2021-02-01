@@ -7,7 +7,8 @@ import sh.evc.sdk.wechat.pay.response.secapi.RefundResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 退款
+ * 申请退款
+ * https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_sl_api.php?chapter=9_4
  *
  * @author winixi
  * @date 2021/1/27 2:45 PM

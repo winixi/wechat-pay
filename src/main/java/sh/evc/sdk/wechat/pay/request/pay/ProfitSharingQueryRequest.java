@@ -7,6 +7,7 @@ import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
  * 分账查询请求
+ * https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_2&index=3
  *
  * @author winixi
  * @date 2021/1/28 4:08 PM

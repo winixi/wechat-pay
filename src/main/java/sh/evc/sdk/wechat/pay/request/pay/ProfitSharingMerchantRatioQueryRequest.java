@@ -7,6 +7,7 @@ import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
  * 查询最大分账比例
+ * https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_11&index=8
  *
  * @author winixi
  * @date 2021/1/28 4:20 PM

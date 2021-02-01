@@ -7,6 +7,7 @@ import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
  * 修改联系人
+ * https://pay.weixin.qq.com/wiki/doc/api/xiaowei.php?chapter=21_4
  *
  * @author winixi
  * @date 2021/1/29 4:44 PM

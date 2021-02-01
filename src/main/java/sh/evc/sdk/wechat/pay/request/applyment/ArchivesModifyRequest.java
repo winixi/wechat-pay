@@ -7,6 +7,7 @@ import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
  * 修改结算银行卡
+ * https://pay.weixin.qq.com/wiki/doc/api/xiaowei.php?chapter=21_2
  *
  * @author winixi
  * @date 2021/1/29 4:46 PM

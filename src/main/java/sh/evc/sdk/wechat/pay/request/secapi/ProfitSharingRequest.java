@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * 单次分账请求
+ * https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_1&index=1
  *
  * @author winixi
  * @date 2021/1/28 4:06 PM

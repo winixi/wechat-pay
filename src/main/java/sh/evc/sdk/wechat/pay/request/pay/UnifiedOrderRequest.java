@@ -11,7 +11,8 @@ import sh.evc.sdk.wechat.pay.util.ParamsMap;
 import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 
 /**
- * 生成预支付订单
+ * 统一下单
+ * https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_sl_api.php?chapter=9_1
  *
  * @author winixi
  * @date 2021/1/22 9:37 AM

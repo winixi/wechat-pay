@@ -6,7 +6,8 @@ import sh.evc.sdk.wechat.pay.response.applyment.UpgradeStateResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 升级状态查询
+ * 查询升级状态
+ * https://pay.weixin.qq.com/wiki/doc/api/xiaowei.php?chapter=28_3&index=3
  *
  * @author winixi
  * @date 2021/1/29 4:57 PM

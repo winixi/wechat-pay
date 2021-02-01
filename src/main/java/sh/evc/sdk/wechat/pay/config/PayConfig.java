@@ -91,4 +91,5 @@ public interface PayConfig {
    * @return
    */
   String getProfitNotify();
+
 }

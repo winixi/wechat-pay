@@ -7,20 +7,25 @@
 > 测试代码配置文件  
 src/test/resources/config.properties
 
-> 服务商配置  
+```
+# 服务商配置  
 appId=  
 apiKey=  
 aesKey=  
 mchId=
 
-> 特约商户  
+# 特约商户  
 subAppId=  
 subMchId=
 
-> 通知  
-payNotify=http://balabalala.cn:9090/wechat-pay/payNotify  
-refundNotify=http://balabalala.cn:9090/wechat-pay/refundNotify  
-profitNotify=http://balabalala.cn:9090/wechat-pay/profitNotify
+# 通知  
+payNotify=  
+refundNotify=  
+profitNotify=
+ 
+# 路径
+certPath=
+```
 
 # 代码示例
 
@@ -63,7 +68,7 @@ public void unifiedOrder() {
     * 请求单次分账
     * 查询分账结果
 
-* 进件  <未完成>
+* 进件
     * 小微申请入驻
     * 查询申请状态
     * 提交升级申请

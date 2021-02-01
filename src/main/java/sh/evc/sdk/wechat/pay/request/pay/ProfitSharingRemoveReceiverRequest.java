@@ -9,6 +9,7 @@ import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 
 /**
  * 删除分账接收方
+ * https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_4&index=5
  *
  * @author winixi
  * @date 2021/1/28 4:14 PM

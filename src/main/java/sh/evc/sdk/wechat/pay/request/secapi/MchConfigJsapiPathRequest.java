@@ -5,7 +5,8 @@ import sh.evc.sdk.wechat.pay.response.secapi.MchConfigJsapiPathResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 增加jsapi_path配置
+ * 增加支付目录配置
+ * https://pay.weixin.qq.com/wiki/doc/api/xiaowei.php?chapter=20_2&index=2
  *
  * @author winixi
  * @date 2021/1/29 1:59 PM

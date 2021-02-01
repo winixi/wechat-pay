@@ -7,6 +7,7 @@ import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
  * 关注配置
+ * https://pay.weixin.qq.com/wiki/doc/api/xiaowei.php?chapter=20_0&index=1
  *
  * @author winixi
  * @date 2021/1/29 2:13 PM

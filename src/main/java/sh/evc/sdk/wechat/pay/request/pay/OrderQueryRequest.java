@@ -6,7 +6,8 @@ import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 订单查询
+ * 查询订单
+ * https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_sl_api.php?chapter=9_2
  *
  * @author winixi
  * @date 2021/1/26 4:45 PM
