@@ -1,13 +1,12 @@
 package sh.evc.sdk.wechat.pay.util;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sh.evc.sdk.wechat.pay.Const;
 import sh.evc.sdk.wechat.pay.dict.SignType;
+import sh.evc.sdk.wechat.pay.domain.EncryptCertificate;
 
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
@@ -139,19 +138,17 @@ public class SignatureUtil {
   /**
    * 获取到证书内容
    *
-   * @param data
+   * @param certificate
    * @param aesKey
    * @return
    * @throws Exception
    */
-  public static String getCertContent(JSONArray data, String aesKey) throws Exception {
+  public static String getCertContent(EncryptCertificate certificate, String aesKey) throws Exception {
     //敏感信息证书生成所需参数
-    String encryptCertificate = JSONObject.parseObject(JSONObject.toJSONString(data.get(0))).getString("encrypt_certificate");
-    String nonce = JSONObject.parseObject(encryptCertificate).getString("nonce");
-    String associatedData = JSONObject.parseObject(encryptCertificate).getString("associated_data");
-
+    String nonce = certificate.getNonce();
+    String associatedData = certificate.getAssociatedData();
     //要被解密的证书字符串
-    String cipherText = JSONObject.parseObject(encryptCertificate).getString("ciphertext");
+    String cipherText = certificate.getCiphertext();
     return aesgcmDecrypt(associatedData, nonce, cipherText, aesKey);
   }
 
@@ -270,23 +267,5 @@ public class SignatureUtil {
       sb.append(Integer.toHexString((item & 0xFF) | 0x100), 1, 3);
     }
     return sb.toString().toUpperCase();
-  }
-
-  /**
-   * 主函数
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-
-//    String a = "adfasdfasdfsd";
-//    String key = "adasdfasdfsadfasdfsdf";
-//    log.info("原内容:" + a);
-//
-//    String encode = reqInfoEncrypt(a, key);
-//    log.info("加密后:" + encode);
-//
-//    String decode = reqInfoDecrypt(encode, key);
-//    log.info("解密后:" + decode);
   }
 }

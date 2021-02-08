@@ -46,18 +46,19 @@ public class PayClient {
   public <T extends ApiResponse> T execute(ApiRequest<T> request) {
     RequestMethod method = request.getMethod();
     String url = Const.SERVER_URL + request.getUri();
-    ParamsMap params = request.getRequestParams();
     DataType dataType = request.getDataType();
     boolean useNonce = request.useNonce();
-    String body = getRequestBody(method, dataType, params, useNonce);
+    ParamsMap basicParams = getBasicParams(request.getBasicParams(), request.getBasicUnSignParams(), useNonce);
+    String entityData = getEntityData(dataType, request.getEntityParams(), useNonce);
     Date requestTime = new Date();
+    File file = request.getFile();
     String res;
     if (request.useCert()) {
       char[] password = config.getMchId().toCharArray();
       InputStream certStream = getCertStream();
-      res = this.request.request(method, url, body, null, password, certStream);
+      res = this.request.request(method, url, basicParams, entityData, file, password, certStream);
     } else {
-      res = this.request.request(method, url, body, null);
+      res = this.request.request(method, url, basicParams, entityData, file);
     }
 
     T response;
@@ -68,11 +69,12 @@ public class PayClient {
     }
 
     response.setReqUrl(url);
-    response.setRequestParams(params);
+    response.setBasicParams(basicParams);
+    response.setEntityData(entityData);
     response.setMethod(request.getMethod());
     response.setRequestTime(requestTime);
     response.setResponseTime(new Date());
-    response.setRequestBody(body);
+    response.setRequestBody(entityData);
     response.setResponseBody(res);
 
     handler.append(response);
@@ -80,18 +82,36 @@ public class PayClient {
   }
 
   /**
-   * json化所有参数
+   * 整理params
    *
-   * @param method
+   * @param signParams
+   * @param unSignParams
+   * @param useNonce
+   * @return
+   */
+  private ParamsMap getBasicParams(ParamsMap signParams, ParamsMap unSignParams, boolean useNonce) {
+    if (signParams == null || signParams.isEmpty()) {
+      return null;
+    }
+    if (useNonce) {
+      signParams.put("nonce_str", NonceStrUtil.generate());
+    }
+    signParams.put("sign", SignatureUtil.generate(signParams, config.getApiKey()));
+    if (unSignParams != null) {
+      signParams.putAll(unSignParams);
+    }
+    return signParams;
+  }
+
+  /**
+   * 整理data
+   *
    * @param dataType
    * @param params
    * @param useNonce
    * @return
    */
-  private String getRequestBody(RequestMethod method, DataType dataType, ParamsMap params, boolean useNonce) {
-    if (method == RequestMethod.GET) {
-      return "";
-    }
+  private String getEntityData(DataType dataType, ParamsMap params, boolean useNonce) {
     if (params == null || params.isEmpty()) {
       return "";
     }

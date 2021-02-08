@@ -18,7 +18,8 @@ public class ApiResponse {
   private RequestMethod method;
   private Date requestTime;
   private Date responseTime;
-  private ParamsMap requestParams;
+  private ParamsMap basicParams;
+  private String entityData;
   private String requestBody;
   private String responseBody;
 
@@ -54,12 +55,20 @@ public class ApiResponse {
     this.responseTime = responseTime;
   }
 
-  public Map<String, String> getRequestParams() {
-    return requestParams;
+  public Map<String, String> getBasicParams() {
+    return basicParams;
   }
 
-  public void setRequestParams(ParamsMap requestParams) {
-    this.requestParams = requestParams;
+  public void setBasicParams(ParamsMap basicParams) {
+    this.basicParams = basicParams;
+  }
+
+  public String getEntityData() {
+    return entityData;
+  }
+
+  public void setEntityData(String entityData) {
+    this.entityData = entityData;
   }
 
   public String getRequestBody() {
@@ -85,7 +94,8 @@ public class ApiResponse {
             ", method=" + method +
             ", requestTime=" + requestTime +
             ", responseTime=" + responseTime +
-            ", requestParams=" + requestParams +
+            ", requestParams=" + basicParams +
+            ", entityData=" + entityData +
             ", requestBody=" + requestBody +
             ", responseBody='" + responseBody + '\'' +
             "} " + super.toString();

@@ -70,7 +70,7 @@ public class MchConfigAppIdRequest extends ApiRequest<MchConfigAppIdResponse> {
   }
 
   @Override
-  public ParamsMap getRequestParams() {
+  public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
     params.add("appid", appId);
     params.add("mch_id", mchId);

@@ -78,7 +78,7 @@ public class MchRecommendConfigRequest extends ApiRequest<MchRecommendConfigResp
   }
 
   @Override
-  public ParamsMap getRequestParams() {
+  public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
     params.add("mch_id", mchId);
     params.add("sub_mch_id", subMchId);

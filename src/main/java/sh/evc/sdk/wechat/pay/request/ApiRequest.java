@@ -6,6 +6,8 @@ import sh.evc.sdk.wechat.pay.response.ApiResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 import sh.evc.sdk.wechat.pay.util.StringUtil;
 
+import java.io.File;
+
 /**
  * api request
  *
@@ -19,7 +21,25 @@ public abstract class ApiRequest<T extends ApiResponse> {
    *
    * @return
    */
-  public abstract ParamsMap getRequestParams();
+  public abstract ParamsMap getEntityParams();
+
+  /**
+   * 获取基本请求参数
+   *
+   * @return
+   */
+  public ParamsMap getBasicParams() {
+    return null;
+  }
+
+  /**
+   * 获取不签名的请求参数
+   *
+   * @return
+   */
+  public ParamsMap getBasicUnSignParams() {
+    return null;
+  }
 
   /**
    * 是否使用证书
@@ -45,6 +65,15 @@ public abstract class ApiRequest<T extends ApiResponse> {
    * @return
    */
   public abstract String getUri();
+
+  /**
+   * 获取文件
+   *
+   * @return
+   */
+  public File getFile() {
+    return null;
+  }
 
   /**
    * 获取请求方法
@@ -80,7 +109,7 @@ public abstract class ApiRequest<T extends ApiResponse> {
     if (getMethod() == RequestMethod.POST) {
       return "";
     }
-    ParamsMap params = getRequestParams();
+    ParamsMap params = getEntityParams();
     if (params == null || params.isEmpty()) {
       return "";
     }

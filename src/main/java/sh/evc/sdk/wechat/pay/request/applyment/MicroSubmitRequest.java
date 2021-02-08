@@ -4,6 +4,7 @@ import sh.evc.sdk.wechat.pay.dict.SignType;
 import sh.evc.sdk.wechat.pay.request.ApiRequest;
 import sh.evc.sdk.wechat.pay.response.applyment.MicroSubmitResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
+import sh.evc.sdk.wechat.pay.util.RsaEncryptUtil;
 import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 
 /**
@@ -176,6 +177,11 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
   private SignType signType = SignType.HMACSHA256;
 
   /**
+   * 证书内容
+   */
+  private String cert;
+
+  /**
    * 必填
    *
    * @param certSn
@@ -201,8 +207,9 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
    * @param rate
    * @param contact
    * @param contactPhone
+   * @param cert
    */
-  public MicroSubmitRequest(String certSn, String mchId, String businessCode, String idCardCopy, String idCardNational, String idCardName, String idCardNumber, String idCardValidTime, String accountName, String accountBank, String bankAddressCode, String accountNumber, String storeName, String storeAddressCode, String storeStreet, String storeEntrancePic, String indoorPic, String merchantShortname, String servicePhone, String productDesc, String rate, String contact, String contactPhone) {
+  public MicroSubmitRequest(String certSn, String mchId, String businessCode, String idCardCopy, String idCardNational, String idCardName, String idCardNumber, String idCardValidTime, String accountName, String accountBank, String bankAddressCode, String accountNumber, String storeName, String storeAddressCode, String storeStreet, String storeEntrancePic, String indoorPic, String merchantShortname, String servicePhone, String productDesc, String rate, String contact, String contactPhone, String cert) {
     this.certSn = certSn;
     this.mchId = mchId;
     this.businessCode = businessCode;
@@ -226,6 +233,7 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
     this.rate = rate;
     this.contact = contact;
     this.contactPhone = contactPhone;
+    this.cert = cert;
   }
 
   public void setCertSn(String certSn) {
@@ -348,8 +356,12 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
     this.contactEmail = contactEmail;
   }
 
+  public void setCert(String cert) {
+    this.cert = cert;
+  }
+
   @Override
-  public ParamsMap getRequestParams() {
+  public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
     params.add("version", version);
     params.add("mch_id", mchId);
@@ -357,14 +369,14 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
     params.add("business_code", businessCode);
     params.add("id_card_copy", idCardCopy);
     params.add("id_card_national", idCardNational);
-    params.add("id_card_name", idCardName);
-    params.add("id_card_number", idCardNumber);
+    params.add("id_card_name", RsaEncryptUtil.rsaEncrypt(idCardName, cert));
+    params.add("id_card_number", RsaEncryptUtil.rsaEncrypt(idCardNumber, cert));
     params.add("id_card_valid_time", idCardValidTime);
-    params.add("account_name", accountName);
+    params.add("account_name", RsaEncryptUtil.rsaEncrypt(accountName, cert));
     params.add("account_bank", accountBank);
     params.add("bank_address_code", bankAddressCode);
     params.add("bank_name", bankName);
-    params.add("account_number", accountNumber);
+    params.add("account_number", RsaEncryptUtil.rsaEncrypt(accountNumber, cert));
     params.add("store_name", storeName);
     params.add("store_address_code", storeAddressCode);
     params.add("store_street", storeStreet);
@@ -379,9 +391,9 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
     params.add("rate", rate);
     params.add("business_addition_desc", businessAdditionDesc);
     params.add("business_addition_pics", SerializeUtil.beanToJson(businessAdditionPics));
-    params.add("contact", contact);
-    params.add("contact_phone", contactPhone);
-    params.add("contact_email", contactEmail);
+    params.add("contact", RsaEncryptUtil.rsaEncrypt(contact, cert));
+    params.add("contact_phone", RsaEncryptUtil.rsaEncrypt(contactPhone, cert));
+    params.add("contact_email", RsaEncryptUtil.rsaEncrypt(contactEmail, cert));
     params.add("sign_type", signType.getName());
     return params;
   }
@@ -394,6 +406,11 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
   @Override
   public Class<MicroSubmitResponse> getResponseClass() {
     return MicroSubmitResponse.class;
+  }
+
+  @Override
+  public boolean useCert() {
+    return true;
   }
 }
 

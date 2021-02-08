@@ -152,7 +152,7 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
   }
 
   @Override
-  public ParamsMap getRequestParams() {
+  public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
     params.add("appid", appId);
     params.add("sub_appid", subAppId);

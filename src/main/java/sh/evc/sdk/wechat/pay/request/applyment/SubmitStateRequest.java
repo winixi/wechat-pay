@@ -64,7 +64,7 @@ public class SubmitStateRequest extends ApiRequest<SubmitStateResponse> {
   }
 
   @Override
-  public ParamsMap getRequestParams() {
+  public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
     params.add("version", version);
     params.add("mchId", mchId);

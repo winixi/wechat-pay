@@ -5,11 +5,17 @@ import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.request.pay.OrderQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.ProfitSharingMerchantRatioQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.UnifiedOrderRequest;
+import sh.evc.sdk.wechat.pay.request.risk.CertificatesGetRequest;
+import sh.evc.sdk.wechat.pay.request.secapi.MediaUploadRequest;
 import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.ProfitSharingMerchantRatioQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.UnifiedOrderResponse;
+import sh.evc.sdk.wechat.pay.response.risk.CertificatesGetResponse;
+import sh.evc.sdk.wechat.pay.response.secapi.MediaUploadResponse;
 import sh.evc.sdk.wechat.pay.util.JsonFormat;
 import sh.evc.sdk.wechat.pay.util.NonceStrUtil;
+
+import java.io.File;
 
 /**
  * @author winixi
@@ -62,6 +68,25 @@ public class PayClientTest extends BaseTest {
     ProfitSharingMerchantRatioQueryRequest request = new ProfitSharingMerchantRatioQueryRequest(config.getMchId());
     request.setSubMchId(config.getSubMchId());
     ProfitSharingMerchantRatioQueryResponse response = client.execute(request);
+    JsonFormat.print(response);
+  }
+
+  /**
+   * 获取平台证书
+   */
+  @Test
+  public void CertificatesGet() {
+    CertificatesGetRequest request = new CertificatesGetRequest(config.getMchId());
+    CertificatesGetResponse response = client.execute(request);
+    JsonFormat.print(response.getCertificates().getData()[0]);
+  }
+
+  @Test
+  public void MediaUpload() {
+    String fileName = "media.png";
+    String filePath = this.getClass().getClassLoader().getResource(fileName).getFile();
+    MediaUploadRequest request = new MediaUploadRequest(config.getMchId(), fileName, new File(filePath));
+    MediaUploadResponse response = client.execute(request);
     JsonFormat.print(response);
   }
 }

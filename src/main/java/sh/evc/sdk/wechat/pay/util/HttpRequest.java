@@ -16,6 +16,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,11 +62,17 @@ public class HttpRequest {
    *
    * @param method 请求方法
    * @param url    请求地址
+   * @param params 请求参数
    * @param data   请求体文本数据
    * @param file   请求体二进制文件
    */
-  private HttpUriRequest buildRequest(String method, String url, String data, File file) {
+  private HttpUriRequest buildRequest(String method, String url, ParamsMap params, String data, File file) {
     RequestBuilder builder = RequestBuilder.create(method).setUri(url);
+    if (params != null) {
+      for (String key : params.keySet()) {
+        builder.addParameter(new BasicNameValuePair(key, params.get(key)));
+      }
+    }
     if (data != null) {
       builder.setEntity(new StringEntity(data, UTF_8));
     }
@@ -87,10 +94,10 @@ public class HttpRequest {
    * @param file
    * @return
    */
-  public String request(RequestMethod method, String url, String data, File file) {
+  public String request(RequestMethod method, String url, ParamsMap params, String data, File file) {
     HttpClientConnectionManager connManager = getConnectionManager();
     HttpClient client = HttpClientBuilder.create().setConnectionManager(connManager).build();
-    HttpUriRequest request = buildRequest(method.name(), url, data, file);
+    HttpUriRequest request = buildRequest(method.name(), url, params, data, file);
     return getResponse(client, request);
   }
 
@@ -99,13 +106,14 @@ public class HttpRequest {
    *
    * @param method
    * @param url
+   * @param params
    * @param data
    * @param file
    * @param password
    * @param certStream
    * @return
    */
-  public String request(RequestMethod method, String url, String data, File file, char[] password, InputStream certStream) {
+  public String request(RequestMethod method, String url, ParamsMap params, String data, File file, char[] password, InputStream certStream) {
     HttpClientConnectionManager connManager;
     try {
       connManager = getCertConnectionManager(password, certStream);
@@ -114,7 +122,7 @@ public class HttpRequest {
       return null;
     }
     HttpClient client = HttpClientBuilder.create().setConnectionManager(connManager).build();
-    HttpUriRequest request = buildRequest(method.name(), url, data, file);
+    HttpUriRequest request = buildRequest(method.name(), url, params, data, file);
     return getResponse(client, request);
   }
 

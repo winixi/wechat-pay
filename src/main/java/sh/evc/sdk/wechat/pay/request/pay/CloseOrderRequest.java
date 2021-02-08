@@ -84,7 +84,7 @@ public class CloseOrderRequest extends ApiRequest<CloseOrderResponse> {
   }
 
   @Override
-  public ParamsMap getRequestParams() {
+  public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
     params.add("appid", appId);
     params.add("sub_appid", subAppId);

@@ -299,7 +299,7 @@ public class MicroUpgradeRequest extends ApiRequest<MicroUpgradeResponse> {
   }
 
   @Override
-  public ParamsMap getRequestParams() {
+  public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
     params.add("version", version);
     params.add("cert_sn", certSn);

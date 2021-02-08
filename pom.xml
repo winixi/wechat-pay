@@ -4,7 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>sh.evc.sdk</groupId>
-  <artifactId>wechat-pay3</artifactId>
+  <artifactId>wechat-pay</artifactId>
+  <packaging>jar</packaging>
   <version>1.0</version>
 
   <properties>
@@ -16,17 +17,9 @@
     <slf4j.version>1.7.30</slf4j.version>
     <junit.version>4.12</junit.version>
 
-    <!--要删除的-->
-    <fastjson>1.2.58</fastjson>
   </properties>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>${fastjson}</version>
-    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
     <dependency>
@@ -65,4 +58,8 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <finalName>${project.artifactId}-${project.version}</finalName>
+  </build>
 </project>
