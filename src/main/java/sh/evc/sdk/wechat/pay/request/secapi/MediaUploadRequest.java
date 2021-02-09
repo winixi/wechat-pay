@@ -58,7 +58,7 @@ public class MediaUploadRequest extends ApiRequest<MediaUploadResponse> {
   }
 
   @Override
-  public ParamsMap getBasicParams() {
+  public ParamsMap getSignBasicParams() {
     ParamsMap params = new ParamsMap();
     params.add("mch_id", mchId);
     params.add("media_hash", DigestUtil.md5Hex(file).toLowerCase());
@@ -67,7 +67,7 @@ public class MediaUploadRequest extends ApiRequest<MediaUploadResponse> {
   }
 
   @Override
-  public ParamsMap getBasicUnSignParams() {
+  public ParamsMap getUnSignBasicParams() {
     ParamsMap params = new ParamsMap();
     params.add("media", media);
     return params;

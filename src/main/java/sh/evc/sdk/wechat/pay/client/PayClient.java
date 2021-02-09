@@ -48,7 +48,7 @@ public class PayClient {
     String url = Const.SERVER_URL + request.getUri();
     DataType dataType = request.getDataType();
     boolean useNonce = request.useNonce();
-    ParamsMap basicParams = getBasicParams(request.getBasicParams(), request.getBasicUnSignParams(), useNonce);
+    ParamsMap basicParams = getBasicParams(request.getSignBasicParams(), request.getUnSignBasicParams(), useNonce);
     String entityData = getEntityData(dataType, request.getEntityParams(), useNonce);
     Date requestTime = new Date();
     File file = request.getFile();
@@ -74,7 +74,6 @@ public class PayClient {
     response.setMethod(request.getMethod());
     response.setRequestTime(requestTime);
     response.setResponseTime(new Date());
-    response.setRequestBody(entityData);
     response.setResponseBody(res);
 
     handler.append(response);

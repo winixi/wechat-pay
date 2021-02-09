@@ -28,7 +28,7 @@ public abstract class ApiRequest<T extends ApiResponse> {
    *
    * @return
    */
-  public ParamsMap getBasicParams() {
+  public ParamsMap getSignBasicParams() {
     return null;
   }
 
@@ -37,7 +37,7 @@ public abstract class ApiRequest<T extends ApiResponse> {
    *
    * @return
    */
-  public ParamsMap getBasicUnSignParams() {
+  public ParamsMap getUnSignBasicParams() {
     return null;
   }
 

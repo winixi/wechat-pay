@@ -20,7 +20,6 @@ public class ApiResponse {
   private Date responseTime;
   private ParamsMap basicParams;
   private String entityData;
-  private String requestBody;
   private String responseBody;
 
   public String getReqUrl() {
@@ -71,14 +70,6 @@ public class ApiResponse {
     this.entityData = entityData;
   }
 
-  public String getRequestBody() {
-    return requestBody;
-  }
-
-  public void setRequestBody(String requestBody) {
-    this.requestBody = requestBody;
-  }
-
   public String getResponseBody() {
     return responseBody;
   }
@@ -94,10 +85,9 @@ public class ApiResponse {
             ", method=" + method +
             ", requestTime=" + requestTime +
             ", responseTime=" + responseTime +
-            ", requestParams=" + basicParams +
-            ", entityData=" + entityData +
-            ", requestBody=" + requestBody +
+            ", basicParams=" + basicParams +
+            ", entityData='" + entityData + '\'' +
             ", responseBody='" + responseBody + '\'' +
-            "} " + super.toString();
+            '}';
   }
 }

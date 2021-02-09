@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -14,9 +15,9 @@ import java.util.Properties;
  * @author winixi
  * @date 2021/1/21 4:43 PM
  */
-public class TestPayConfig implements PayConfig {
+public class TestConfig implements PayConfig {
 
-  private final static Logger logger = LoggerFactory.getLogger(TestPayConfig.class);
+  private final static Logger logger = LoggerFactory.getLogger(TestConfig.class);
 
   private String appId;
   private String subAppId;
@@ -29,10 +30,10 @@ public class TestPayConfig implements PayConfig {
   private String refundNotify;
   private String profitNotify;
 
-  public TestPayConfig() {
+  public TestConfig() {
     InputStream in = this.getClass().getResourceAsStream("/config.properties");
     try {
-      InputStreamReader inputStreamReader = new InputStreamReader(in, "UTF-8");
+      InputStreamReader inputStreamReader = new InputStreamReader(in, StandardCharsets.UTF_8);
       Properties props = new Properties();
       props.load(inputStreamReader);
       appId = props.getProperty("appId");

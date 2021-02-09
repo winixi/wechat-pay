@@ -3,8 +3,8 @@ package sh.evc.sdk.wechat.pay.util;
 /**
  * 字符串工具类。
  *
- * @author carver.gu
- * @since 1.0, Sep 12, 2009
+ * @author winixi
+ * @date 2021/1/26 10:02 AM
  */
 public abstract class StringUtil {
 
