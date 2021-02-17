@@ -80,6 +80,9 @@ public void unifiedOrder() {
     * 绑定appId配置
     * 配置查询
 
+* 转帐
+    * 企业付款
+    * 查询付款
 
 # 联系 
 
