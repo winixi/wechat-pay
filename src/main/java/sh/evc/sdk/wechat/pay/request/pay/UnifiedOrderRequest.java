@@ -12,7 +12,10 @@ import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 
 /**
  * 统一下单
- * https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_sl_api.php?chapter=9_1
+ * <p>
+ * 服务商 -> https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_sl_api.php?chapter=9_1
+ * 小程序 -> https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_1
+ * jsapi -> https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
  *
  * @author winixi
  * @date 2021/1/22 9:37 AM
@@ -282,7 +285,7 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
   }
 
   /**
-   * 必填参数
+   * 服务商
    *
    * @param appId
    * @param mchId
@@ -298,6 +301,29 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
     this.appId = appId;
     this.mchId = mchId;
     this.subMchId = subMchId;
+    this.body = body;
+    this.outTradeNo = outTradeNo;
+    this.totalFee = totalFee;
+    this.spbillCreateIp = spbillCreateIp;
+    this.notifyUrl = notifyUrl;
+    this.tradeType = tradeType;
+  }
+
+  /**
+   * 普通商户
+   *
+   * @param appId
+   * @param mchId
+   * @param body
+   * @param outTradeNo
+   * @param totalFee
+   * @param spbillCreateIp
+   * @param notifyUrl
+   * @param tradeType
+   */
+  public UnifiedOrderRequest(String appId, String mchId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String notifyUrl, TradeType tradeType) {
+    this.appId = appId;
+    this.mchId = mchId;
     this.body = body;
     this.outTradeNo = outTradeNo;
     this.totalFee = totalFee;

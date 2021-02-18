@@ -1,11 +1,11 @@
 # wechat-pay
 
-简化业务代码中关于微信支付的逻辑，抽象微信支付sdk for 服务商
+简化服务端代码中关于微信支付的逻辑，简化服务端对支付接口的访问
 
-# 配置
+# 配置文件
 
-> 测试代码配置文件  
-src/test/resources/config.properties
+> 作为服务商配置文件
+src/test/resources/service.properties
 
 ```
 # 服务商配置  
@@ -22,6 +22,24 @@ subMchId=
 payNotify=  
 refundNotify=  
 profitNotify=
+ 
+# 路径
+certPath=
+```
+
+> 作为普通商户配置文件
+src/test/resources/standard.properties
+
+```
+# 商户配置  
+appId=  
+apiKey=  
+aesKey=  
+mchId=
+
+# 通知  
+payNotify=  
+refundNotify=  
  
 # 路径
 certPath=

@@ -15,9 +15,9 @@ import java.util.Properties;
  * @author winixi
  * @date 2021/1/21 4:43 PM
  */
-public class TestConfig implements PayConfig {
+public class ServicePayConfigTest implements ServicePayConfig {
 
-  private final static Logger logger = LoggerFactory.getLogger(TestConfig.class);
+  private final static Logger logger = LoggerFactory.getLogger(ServicePayConfigTest.class);
 
   private String appId;
   private String subAppId;
@@ -30,8 +30,8 @@ public class TestConfig implements PayConfig {
   private String refundNotify;
   private String profitNotify;
 
-  public TestConfig() {
-    InputStream in = this.getClass().getResourceAsStream("/config.properties");
+  public ServicePayConfigTest() {
+    InputStream in = this.getClass().getResourceAsStream("/service.properties");
     try {
       InputStreamReader inputStreamReader = new InputStreamReader(in, StandardCharsets.UTF_8);
       Properties props = new Properties();
@@ -51,7 +51,6 @@ public class TestConfig implements PayConfig {
       logger.error("读取配置错误", e);
     }
   }
-
 
   @Override
   public String getAppId() {

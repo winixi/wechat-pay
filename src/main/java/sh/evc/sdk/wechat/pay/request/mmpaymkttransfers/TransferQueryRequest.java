@@ -5,7 +5,8 @@ import sh.evc.sdk.wechat.pay.response.mmpaymkttransfers.TransferQueryResponse;
 import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
- * 企业付款查询
+ * 查询企业付款
+ * https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_3
  *
  * @author winixi
  * @date 2021/2/17 2:20 PM
@@ -26,6 +27,19 @@ public class TransferQueryRequest extends ApiRequest<TransferQueryResponse> {
    * 商户调用企业付款API时使用的商户订单号
    */
   private String partnerTradeNo;
+
+  /**
+   * 构造
+   *
+   * @param appId
+   * @param mchId
+   * @param partnerTradeNo
+   */
+  public TransferQueryRequest(String appId, String mchId, String partnerTradeNo) {
+    this.appId = appId;
+    this.mchId = mchId;
+    this.partnerTradeNo = partnerTradeNo;
+  }
 
   @Override
   public ParamsMap getEntityParams() {

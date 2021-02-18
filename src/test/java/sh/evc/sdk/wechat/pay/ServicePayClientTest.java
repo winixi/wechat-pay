@@ -1,7 +1,15 @@
 package sh.evc.sdk.wechat.pay;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sh.evc.sdk.wechat.pay.client.PayClient;
+import sh.evc.sdk.wechat.pay.config.ServicePayConfig;
+import sh.evc.sdk.wechat.pay.config.ServicePayConfigTest;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
+import sh.evc.sdk.wechat.pay.handler.ResponseHandler;
+import sh.evc.sdk.wechat.pay.handler.TestResponseHandler;
 import sh.evc.sdk.wechat.pay.request.pay.OrderQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.ProfitSharingMerchantRatioQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.UnifiedOrderRequest;
@@ -21,7 +29,17 @@ import java.io.File;
  * @author winixi
  * @date 2021/1/21 4:31 PM
  */
-public class PayClientTest extends BaseTest {
+public class ServicePayClientTest {
+
+  public final static Logger log = LoggerFactory.getLogger(ServicePayClientTest.class);
+  public PayClient client;
+  public ServicePayConfig config = new ServicePayConfigTest();
+  public ResponseHandler handler = new TestResponseHandler();
+
+  @Before
+  public void before() {
+    client = new PayClient(config, handler);
+  }
 
   /**
    * 统一下单

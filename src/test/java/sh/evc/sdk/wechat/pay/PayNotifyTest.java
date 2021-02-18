@@ -1,6 +1,8 @@
 package sh.evc.sdk.wechat.pay;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sh.evc.sdk.wechat.pay.notify.PayNotify;
 import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 
@@ -10,7 +12,9 @@ import sh.evc.sdk.wechat.pay.util.SerializeUtil;
  * @author winixi
  * @date 2021/1/26 1:43 PM
  */
-public class PayNotifyTest extends BaseTest {
+public class PayNotifyTest {
+
+  private final static Logger log = LoggerFactory.getLogger(PayNotifyTest.class);
 
   @Test
   public void parse() {

@@ -7,6 +7,7 @@ import sh.evc.sdk.wechat.pay.util.ParamsMap;
 
 /**
  * 企业付款
+ * https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2
  *
  * @author winixi
  * @date 2021/2/17 2:21 PM

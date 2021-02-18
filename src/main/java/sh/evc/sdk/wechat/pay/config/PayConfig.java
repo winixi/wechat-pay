@@ -16,20 +16,6 @@ public interface PayConfig {
   String getAppId();
 
   /**
-   * 获取特约商户应用appid
-   *
-   * @return
-   */
-  String getSubAppId();
-
-  /**
-   * 设置特约商户应用appid
-   *
-   * @param subAppId
-   */
-  void setSubAppId(String subAppId);
-
-  /**
    * 获取api私钥
    *
    * @return
@@ -58,20 +44,6 @@ public interface PayConfig {
   String getMchId();
 
   /**
-   * 获取特约商户号
-   *
-   * @return
-   */
-  String getSubMchId();
-
-  /**
-   * 设置特约商户号
-   *
-   * @param subMchId
-   */
-  void setSubMchId(String subMchId);
-
-  /**
    * 支付通知
    *
    * @return
@@ -84,12 +56,5 @@ public interface PayConfig {
    * @return
    */
   String getRefundNotify();
-
-  /**
-   * 分帐通知
-   *
-   * @return
-   */
-  String getProfitNotify();
 
 }

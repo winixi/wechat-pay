@@ -1,6 +1,8 @@
 package sh.evc.sdk.wechat.pay;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sh.evc.sdk.wechat.pay.domain.RefundInfo;
 import sh.evc.sdk.wechat.pay.notify.RefundNotify;
 import sh.evc.sdk.wechat.pay.util.SerializeUtil;
@@ -9,7 +11,9 @@ import sh.evc.sdk.wechat.pay.util.SerializeUtil;
  * @author winixi
  * @date 2021/1/27 3:52 PM
  */
-public class RefundNotifyTest extends BaseTest {
+public class RefundNotifyTest {
+
+  private final static Logger log = LoggerFactory.getLogger(RefundNotifyTest.class);
 
   @Test
   public void info() {
