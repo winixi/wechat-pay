@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sh.evc.sdk.wechat.pay.client.PayClient;
 import sh.evc.sdk.wechat.pay.config.ServicePayConfig;
-import sh.evc.sdk.wechat.pay.config.ServicePayConfigTest;
+import sh.evc.sdk.wechat.pay.config.TestServicePayConfig;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.handler.ResponseHandler;
 import sh.evc.sdk.wechat.pay.handler.TestResponseHandler;
@@ -33,7 +33,7 @@ public class ServicePayClientTest {
 
   public final static Logger log = LoggerFactory.getLogger(ServicePayClientTest.class);
   public PayClient client;
-  public ServicePayConfig config = new ServicePayConfigTest();
+  public ServicePayConfig config = new TestServicePayConfig();
   public ResponseHandler handler = new TestResponseHandler();
 
   @Before

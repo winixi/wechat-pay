@@ -15,9 +15,9 @@ import java.util.Properties;
  * @author winixi
  * @date 2021/1/21 4:43 PM
  */
-public class ServicePayConfigTest implements ServicePayConfig {
+public class TestServicePayConfig implements ServicePayConfig {
 
-  private final static Logger logger = LoggerFactory.getLogger(ServicePayConfigTest.class);
+  private final static Logger logger = LoggerFactory.getLogger(TestServicePayConfig.class);
 
   private String appId;
   private String subAppId;
@@ -30,7 +30,7 @@ public class ServicePayConfigTest implements ServicePayConfig {
   private String refundNotify;
   private String profitNotify;
 
-  public ServicePayConfigTest() {
+  public TestServicePayConfig() {
     InputStream in = this.getClass().getResourceAsStream("/service.properties");
     try {
       InputStreamReader inputStreamReader = new InputStreamReader(in, StandardCharsets.UTF_8);

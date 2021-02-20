@@ -15,9 +15,9 @@ import java.util.Properties;
  * @author winixi
  * @date 2021/1/21 4:43 PM
  */
-public class StandardPayConfigTest implements StandardPayConfig {
+public class TestStandardPayConfig implements StandardPayConfig {
 
-  private final static Logger logger = LoggerFactory.getLogger(StandardPayConfigTest.class);
+  private final static Logger logger = LoggerFactory.getLogger(TestStandardPayConfig.class);
 
   private String appId;
   private String apiKey;
@@ -27,7 +27,7 @@ public class StandardPayConfigTest implements StandardPayConfig {
   private String payNotify;
   private String refundNotify;
 
-  public StandardPayConfigTest() {
+  public TestStandardPayConfig() {
     InputStream in = this.getClass().getResourceAsStream("/standard.properties");
     try {
       InputStreamReader inputStreamReader = new InputStreamReader(in, StandardCharsets.UTF_8);
