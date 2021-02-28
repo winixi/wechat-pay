@@ -65,6 +65,25 @@ public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
    */
   private SignType signType = SignType.MD5;
 
+  /**
+   *
+   *
+   * @param appId
+   * @param mchId
+   * @param subAppId
+   * @param subMchId
+   * @param outTradeNo
+   * @param outRefundNo
+   */
+  public RefundQueryRequest(String appId, String mchId, String subAppId, String subMchId, String outTradeNo, String outRefundNo) {
+    this.appId = appId;
+    this.mchId = mchId;
+    this.subAppId = subAppId;
+    this.subMchId = subMchId;
+    this.outTradeNo = outTradeNo;
+    this.outRefundNo = outRefundNo;
+  }
+
   public void setAppId(String appId) {
     this.appId = appId;
   }
@@ -105,19 +124,6 @@ public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
     this.signType = signType;
   }
 
-  /**
-   * 必填
-   *
-   * @param appId
-   * @param mchId
-   * @param subMchId
-   */
-  public RefundQueryRequest(String appId, String mchId, String subMchId) {
-    this.appId = appId;
-    this.mchId = mchId;
-    this.subMchId = subMchId;
-  }
-
   @Override
   public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
@@ -129,7 +135,7 @@ public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
     params.add("out_trade_no", outTradeNo);
     params.add("out_refund_no", outRefundNo);
     params.add("refund_id", refundId);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     params.add("offset", String.valueOf(offset));
     return params;
   }

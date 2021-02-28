@@ -8,18 +8,28 @@ package sh.evc.sdk.wechat.pay.dict;
  */
 public enum TradeType {
 
-  //jsapi或小程序支付
+  /**
+   * jsapi或小程序支付
+   */
   JSAPI,
 
-  //native支付
+  /**
+   * native支付
+   */
   NATIVE,
 
-  //app支付
+  /**
+   * app支付
+   */
   APP,
 
-  //H5支付
+  /**
+   * H5支付
+   */
   MWEB,
 
-  //付款码支付，付款码支付有单独的支付接口，所以接口不需要上传，该字段在对账单中会出现
+  /**
+   * 付款码支付，付款码支付有单独的支付接口，所以接口不需要上传，该字段在对账单中会出现
+   */
   MICROPAY;
 }

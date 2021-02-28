@@ -328,7 +328,7 @@ public class MicroUpgradeRequest extends ApiRequest<MicroUpgradeResponse> {
     params.add("business_addition_desc", businessAdditionDesc);
     params.add("business_addition_pics", SerializeUtil.beanToJson(businessAdditionPics));
     params.add("contact_email", contactEmail);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

@@ -101,7 +101,7 @@ public class ProfitSharingQueryRequest extends ApiRequest<ProfitSharingQueryResp
     params.add("sub_mch_id", subMchId);
     params.add("transaction_id", transactionId);
     params.add("out_trade_no", outTradeNo);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

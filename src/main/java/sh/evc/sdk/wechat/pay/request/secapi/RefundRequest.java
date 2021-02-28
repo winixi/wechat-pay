@@ -133,22 +133,53 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
   }
 
   /**
-   * 必填
+   * 服务商子商户退款
    *
    * @param appId
    * @param mchId
+   * @param subAppId
    * @param subMchId
+   * @param outTradeNo
    * @param outRefundNo
    * @param totalFee
    * @param refundFee
+   * @param refundDesc
+   * @param notifyUrl
    */
-  public RefundRequest(String appId, String mchId, String subMchId, String outRefundNo, Integer totalFee, Integer refundFee) {
+  public RefundRequest(String appId, String mchId, String subAppId, String subMchId, String outTradeNo, String outRefundNo, Integer totalFee, Integer refundFee, String refundDesc, String notifyUrl) {
     this.appId = appId;
     this.mchId = mchId;
+    this.subAppId = subAppId;
     this.subMchId = subMchId;
+    this.outTradeNo = outTradeNo;
     this.outRefundNo = outRefundNo;
     this.totalFee = totalFee;
     this.refundFee = refundFee;
+    this.refundDesc = refundDesc;
+    this.notifyUrl = notifyUrl;
+  }
+
+  /**
+   * 普通商户退款
+   *
+   * @param appId
+   * @param mchId
+   * @param outTradeNo
+   * @param outRefundNo
+   * @param totalFee
+   * @param refundFee
+   * @param refundDesc
+   * @param notifyUrl
+   */
+  public RefundRequest(String appId, String mchId, String outTradeNo, String outRefundNo, Integer totalFee, Integer refundFee, String refundDesc, String notifyUrl) {
+    this.appId = appId;
+    this.mchId = mchId;
+    this.outTradeNo = outTradeNo;
+    this.outRefundNo = outRefundNo;
+    this.totalFee = totalFee;
+    this.refundFee = refundFee;
+    this.refundDesc = refundDesc;
+    this.notifyUrl = notifyUrl;
   }
 
   @Override
@@ -160,7 +191,7 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
     params.add("sub_mch_id", subMchId);
     params.add("transaction_id", transactionId);
     params.add("out_trade_no", outTradeNo);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     params.add("out_refund_no", outRefundNo);
     params.add("total_fee", String.valueOf(totalFee));
     params.add("refund_fee", String.valueOf(refundFee));
@@ -178,5 +209,24 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
   @Override
   public Class<RefundResponse> getResponseClass() {
     return RefundResponse.class;
+  }
+
+  @Override
+  public String toString() {
+    return "RefundRequest{" +
+            "appId='" + appId + '\'' +
+            ", subAppId='" + subAppId + '\'' +
+            ", mchId='" + mchId + '\'' +
+            ", subMchId='" + subMchId + '\'' +
+            ", transactionId='" + transactionId + '\'' +
+            ", outTradeNo='" + outTradeNo + '\'' +
+            ", outRefundNo='" + outRefundNo + '\'' +
+            ", totalFee=" + totalFee +
+            ", refundFee=" + refundFee +
+            ", refundFeeType=" + refundFeeType +
+            ", refundDesc='" + refundDesc + '\'' +
+            ", signType=" + signType +
+            ", notifyUrl='" + notifyUrl + '\'' +
+            "} " + super.toString();
   }
 }

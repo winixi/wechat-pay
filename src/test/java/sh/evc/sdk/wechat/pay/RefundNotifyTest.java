@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sh.evc.sdk.wechat.pay.domain.RefundInfo;
-import sh.evc.sdk.wechat.pay.notify.RefundNotify;
+import sh.evc.sdk.wechat.pay.domain.RefundNotify;
 import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 
 /**

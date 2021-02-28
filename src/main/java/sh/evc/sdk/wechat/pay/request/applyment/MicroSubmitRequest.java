@@ -394,7 +394,7 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
     params.add("contact", RsaEncryptUtil.rsaEncrypt(contact, cert));
     params.add("contact_phone", RsaEncryptUtil.rsaEncrypt(contactPhone, cert));
     params.add("contact_email", RsaEncryptUtil.rsaEncrypt(contactEmail, cert));
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

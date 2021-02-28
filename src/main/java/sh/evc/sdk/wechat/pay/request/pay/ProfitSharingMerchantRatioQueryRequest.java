@@ -56,7 +56,7 @@ public class ProfitSharingMerchantRatioQueryRequest extends ApiRequest<ProfitSha
     params.add("mch_id", mchId);
     params.add("sub_mch_id", subMchId);
     params.add("brand_mch_id", brandMchId);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

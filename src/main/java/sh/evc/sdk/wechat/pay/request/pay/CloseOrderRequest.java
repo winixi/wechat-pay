@@ -91,7 +91,7 @@ public class CloseOrderRequest extends ApiRequest<CloseOrderResponse> {
     params.add("mch_id", mchId);
     params.add("sub_mch_id", subMchId);
     params.add("out_trade_no", outTradeNo);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

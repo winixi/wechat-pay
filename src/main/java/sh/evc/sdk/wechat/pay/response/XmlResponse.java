@@ -48,6 +48,18 @@ public class XmlResponse extends ApiResponse {
    */
   private String errCodeDes;
 
+  /**
+   * 业务是否成功
+   *
+   * @return
+   */
+  public boolean isSuccess() {
+    if (returnCode == ReturnCode.SUCCESS && resultCode == ResultCode.SUCCESS) {
+      return true;
+    }
+    return false;
+  }
+
   public ReturnCode getReturnCode() {
     return returnCode;
   }

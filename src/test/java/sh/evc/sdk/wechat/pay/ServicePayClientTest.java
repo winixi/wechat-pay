@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import sh.evc.sdk.wechat.pay.client.PayClient;
 import sh.evc.sdk.wechat.pay.config.ServicePayConfig;
 import sh.evc.sdk.wechat.pay.config.TestServicePayConfig;
+import sh.evc.sdk.wechat.pay.dict.ProfitSharing;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.handler.ResponseHandler;
 import sh.evc.sdk.wechat.pay.handler.TestResponseHandler;
@@ -36,6 +37,11 @@ public class ServicePayClientTest {
   public ServicePayConfig config = new TestServicePayConfig();
   public ResponseHandler handler = new TestResponseHandler();
 
+  /**
+   * 金盒软件，测试商户
+   */
+  private String subMchId = "1536473831";
+
   @Before
   public void before() {
     client = new PayClient(config, handler);
@@ -48,16 +54,15 @@ public class ServicePayClientTest {
   public void unifiedOrder() {
     String appId = config.getAppId();
     String mchId = config.getMchId();
-    String subMchId = config.getSubMchId();
     String body = "测试支付";
     String outTradeNo = NonceStrUtil.generate();
     int totalFee = 100;
     String spbillCreateIp = "127.0.0.1";
+    String subOpenId = "oGimf4l6H20K00gDjXzr-cJFozP4";
+    String subAppId = config.getSubAppId();
     String notifyUrl = config.getPayNotify();
-    UnifiedOrderRequest request = new UnifiedOrderRequest(appId, mchId, subMchId, body, outTradeNo, totalFee, spbillCreateIp, notifyUrl, TradeType.JSAPI);
-    request.setSubAppId(config.getSubAppId());
-    request.setSubOpenId("oGimf4l6H20K00gDjXzr-cJFozP4");
-    request.setProfitSharing("Y");
+    UnifiedOrderRequest request = new UnifiedOrderRequest(appId, mchId, subAppId, subMchId, subOpenId, body, outTradeNo, totalFee, spbillCreateIp, notifyUrl, TradeType.JSAPI);
+    request.setProfitSharing(ProfitSharing.Y);
 
     UnifiedOrderResponse response = client.execute(request);
     JsonFormat.print(response);
@@ -70,10 +75,9 @@ public class ServicePayClientTest {
   public void orderQuery() {
     String appId = config.getAppId();
     String mchId = config.getMchId();
-    String subMchId = config.getSubMchId();
-    OrderQueryRequest request = new OrderQueryRequest(appId, mchId, subMchId);
-    request.setSubAppId(config.getSubAppId());
-    request.setOutTradeNo("1111111");
+    String subAppId = config.getSubAppId();
+    String outTradeNo = "1111111";
+    OrderQueryRequest request = new OrderQueryRequest(appId, mchId, subAppId, subMchId, outTradeNo);
     OrderQueryResponse response = client.execute(request);
     JsonFormat.print(response);
   }
@@ -84,7 +88,6 @@ public class ServicePayClientTest {
   @Test
   public void ProfitSharingMerchantRatioQuery() {
     ProfitSharingMerchantRatioQueryRequest request = new ProfitSharingMerchantRatioQueryRequest(config.getMchId());
-    request.setSubMchId(config.getSubMchId());
     ProfitSharingMerchantRatioQueryResponse response = client.execute(request);
     JsonFormat.print(response);
   }

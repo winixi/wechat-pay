@@ -25,7 +25,6 @@ public class TestServicePayConfig implements ServicePayConfig {
   private String aesKey;
   private String certPath;
   private String mchId;
-  private String subMchId;
   private String payNotify;
   private String refundNotify;
   private String profitNotify;
@@ -42,7 +41,6 @@ public class TestServicePayConfig implements ServicePayConfig {
       aesKey = props.getProperty("aesKey");
       certPath = props.getProperty("certPath");
       mchId = props.getProperty("mchId");
-      subMchId = props.getProperty("subMchId");
       payNotify = props.getProperty("payNotify");
       refundNotify = props.getProperty("refundNotify");
       profitNotify = props.getProperty("profitNotify");
@@ -85,16 +83,6 @@ public class TestServicePayConfig implements ServicePayConfig {
   @Override
   public String getMchId() {
     return mchId;
-  }
-
-  @Override
-  public String getSubMchId() {
-    return subMchId;
-  }
-
-  @Override
-  public void setSubMchId(String subMchId) {
-    this.subMchId = subMchId;
   }
 
   @Override

@@ -70,7 +70,7 @@ public class SubmitStateRequest extends ApiRequest<SubmitStateResponse> {
     params.add("mchId", mchId);
     params.add("applyment_id", applymentId);
     params.add("business_code", businessCode);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

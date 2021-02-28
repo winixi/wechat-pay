@@ -77,17 +77,62 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
     this.signType = signType;
   }
 
+  public String getAppId() {
+    return appId;
+  }
+
+  public String getSubAppId() {
+    return subAppId;
+  }
+
+  public String getMchId() {
+    return mchId;
+  }
+
+  public String getSubMchId() {
+    return subMchId;
+  }
+
+  public String getTransactionId() {
+    return transactionId;
+  }
+
+  public String getOutTradeNo() {
+    return outTradeNo;
+  }
+
+  public SignType getSignType() {
+    return signType;
+  }
+
   /**
-   * 构造
+   * 服务商查询
    *
    * @param appId
    * @param mchId
+   * @param subAppId
    * @param subMchId
+   * @param outTradeNo
    */
-  public OrderQueryRequest(String appId, String mchId, String subMchId) {
+  public OrderQueryRequest(String appId, String mchId, String subAppId, String subMchId, String outTradeNo) {
     this.appId = appId;
     this.mchId = mchId;
+    this.subAppId = subAppId;
     this.subMchId = subMchId;
+    this.outTradeNo = outTradeNo;
+  }
+
+  /**
+   * 普通商户查询
+   *
+   * @param appId
+   * @param mchId
+   * @param outTradeNo
+   */
+  public OrderQueryRequest(String appId, String mchId, String outTradeNo) {
+    this.appId = appId;
+    this.mchId = mchId;
+    this.outTradeNo = outTradeNo;
   }
 
   @Override
@@ -99,7 +144,7 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
     params.add("sub_mch_id", subMchId);
     params.add("transaction_id", transactionId);
     params.add("out_trade_no", outTradeNo);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 
@@ -111,5 +156,18 @@ public class OrderQueryRequest extends ApiRequest<OrderQueryResponse> {
   @Override
   public Class<OrderQueryResponse> getResponseClass() {
     return OrderQueryResponse.class;
+  }
+
+  @Override
+  public String toString() {
+    return "OrderQueryRequest{" +
+            "appId='" + appId + '\'' +
+            ", subAppId='" + subAppId + '\'' +
+            ", mchId='" + mchId + '\'' +
+            ", subMchId='" + subMchId + '\'' +
+            ", transactionId='" + transactionId + '\'' +
+            ", outTradeNo='" + outTradeNo + '\'' +
+            ", signType=" + signType +
+            "} " + super.toString();
   }
 }

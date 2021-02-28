@@ -23,20 +23,6 @@ public interface ServicePayConfig extends PayConfig {
   void setSubAppId(String subAppId);
 
   /**
-   * 获取特约商户号
-   *
-   * @return
-   */
-  String getSubMchId();
-
-  /**
-   * 设置特约商户号
-   *
-   * @param subMchId
-   */
-  void setSubMchId(String subMchId);
-
-  /**
    * 分帐通知
    *
    * @return

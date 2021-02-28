@@ -42,9 +42,9 @@ public class StandardPayClientTest {
     String outTradeNo = NonceStrUtil.generate();
     int totalFee = 100;
     String spbillCreateIp = "127.0.0.1";
+    String openId = "oGimf4l6H20K00gDjXzr-cJFozP4";
     String notifyUrl = config.getPayNotify();
-    UnifiedOrderRequest request = new UnifiedOrderRequest(appId, mchId, body, outTradeNo, totalFee, spbillCreateIp, notifyUrl, TradeType.JSAPI);
-    request.setOpenId("oGimf4l6H20K00gDjXzr-cJFozP4");
+    UnifiedOrderRequest request = new UnifiedOrderRequest(appId, mchId, openId, body, outTradeNo, totalFee, spbillCreateIp, notifyUrl, TradeType.JSAPI);
 
     UnifiedOrderResponse response = client.execute(request);
     JsonFormat.print(response);

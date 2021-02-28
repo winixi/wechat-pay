@@ -108,7 +108,7 @@ public class ArchivesModifyRequest extends ApiRequest<ArchivesModifyResponse> {
     params.add("account_bank", accountBank);
     params.add("bank_address_code", bankAddressCode);
     params.add("cert_sn", certSn);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

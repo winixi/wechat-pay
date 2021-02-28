@@ -98,7 +98,7 @@ public class ProfitSharingRemoveReceiverRequest extends ApiRequest<ProfitSharing
     params.add("appid", appId);
     params.add("sub_appid", subAppId);
     params.add("receiver", SerializeUtil.beanToJson(receiver));
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

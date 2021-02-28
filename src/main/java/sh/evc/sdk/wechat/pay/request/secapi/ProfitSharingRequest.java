@@ -122,7 +122,7 @@ public class ProfitSharingRequest extends ApiRequest<ProfitSharingResponse> {
     params.add("brand_mch_id", brandMchId);
     params.add("appid", appId);
     params.add("sub_appid", subAppId);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     params.add("transaction_id", transactionId);
     params.add("out_order_no", outOrderNo);
     params.add("receivers", SerializeUtil.beanToJson(receivers));

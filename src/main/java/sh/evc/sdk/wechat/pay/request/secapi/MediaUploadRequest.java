@@ -33,6 +33,11 @@ public class MediaUploadRequest extends ApiRequest<MediaUploadResponse> {
   private File file;
 
   /**
+   * hash
+   */
+  private String mediaHash;
+
+  /**
    * 签名类型
    */
   private SignType signType = SignType.HMACSHA256;
@@ -41,10 +46,15 @@ public class MediaUploadRequest extends ApiRequest<MediaUploadResponse> {
     this.mchId = mchId;
     this.media = media;
     this.file = file;
+    this.mediaHash = DigestUtil.md5Hex(file).toLowerCase();
   }
 
   public void setSignType(SignType signType) {
     this.signType = signType;
+  }
+
+  public String getMediaHash() {
+    return mediaHash;
   }
 
   @Override
@@ -61,8 +71,8 @@ public class MediaUploadRequest extends ApiRequest<MediaUploadResponse> {
   public ParamsMap getSignBasicParams() {
     ParamsMap params = new ParamsMap();
     params.add("mch_id", mchId);
-    params.add("media_hash", DigestUtil.md5Hex(file).toLowerCase());
-    params.add("sign_type", signType.getName());
+    params.add("media_hash", mediaHash);
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

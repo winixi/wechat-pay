@@ -59,7 +59,7 @@ public class UpgradeStateRequest extends ApiRequest<UpgradeStateResponse> {
     params.add("version", version);
     params.add("mchId", mchId);
     params.add("sub_mch_id", subMchId);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

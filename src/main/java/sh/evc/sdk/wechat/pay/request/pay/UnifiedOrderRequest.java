@@ -1,6 +1,7 @@
 package sh.evc.sdk.wechat.pay.request.pay;
 
 import sh.evc.sdk.wechat.pay.dict.FeeType;
+import sh.evc.sdk.wechat.pay.dict.ProfitSharing;
 import sh.evc.sdk.wechat.pay.dict.SignType;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.domain.SceneInfo;
@@ -139,7 +140,7 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
    * N-否，不分账
    * 字母要求大写，不传默认不分账
    */
-  private String profitSharing;
+  private ProfitSharing profitSharing = ProfitSharing.N;
 
   /**
    * 场景信息
@@ -234,12 +235,108 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
     this.receipt = receipt;
   }
 
-  public void setProfitSharing(String profitSharing) {
+  public void setProfitSharing(ProfitSharing profitSharing) {
     this.profitSharing = profitSharing;
   }
 
   public void setSceneInfo(SceneInfo sceneInfo) {
     this.sceneInfo = sceneInfo;
+  }
+
+  public String getAppId() {
+    return appId;
+  }
+
+  public String getMchId() {
+    return mchId;
+  }
+
+  public String getSubAppId() {
+    return subAppId;
+  }
+
+  public String getSubMchId() {
+    return subMchId;
+  }
+
+  public String getDeviceInfo() {
+    return deviceInfo;
+  }
+
+  public SignType getSignType() {
+    return signType;
+  }
+
+  public String getBody() {
+    return body;
+  }
+
+  public String getDetail() {
+    return detail;
+  }
+
+  public String getAttach() {
+    return attach;
+  }
+
+  public String getOutTradeNo() {
+    return outTradeNo;
+  }
+
+  public FeeType getFeeType() {
+    return feeType;
+  }
+
+  public Integer getTotalFee() {
+    return totalFee;
+  }
+
+  public String getSpbillCreateIp() {
+    return spbillCreateIp;
+  }
+
+  public String getTimeStart() {
+    return timeStart;
+  }
+
+  public String getTimeExpire() {
+    return timeExpire;
+  }
+
+  public String getGoodsTag() {
+    return goodsTag;
+  }
+
+  public String getNotifyUrl() {
+    return notifyUrl;
+  }
+
+  public TradeType getTradeType() {
+    return tradeType;
+  }
+
+  public String getLimitPay() {
+    return limitPay;
+  }
+
+  public String getOpenId() {
+    return openId;
+  }
+
+  public String getSubOpenId() {
+    return subOpenId;
+  }
+
+  public String getReceipt() {
+    return receipt;
+  }
+
+  public ProfitSharing getProfitSharing() {
+    return profitSharing;
+  }
+
+  public SceneInfo getSceneInfo() {
+    return sceneInfo;
   }
 
   @Override
@@ -250,7 +347,7 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
     params.add("sub_appid", subAppId);
     params.add("sub_mch_id", subMchId);
     params.add("device_info", deviceInfo);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     params.add("body", body);
     params.add("detail", detail);
     params.add("attach", attach);
@@ -267,7 +364,9 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
     params.add("openid", openId);
     params.add("sub_openid", subOpenId);
     params.add("receipt", receipt);
-    params.add("profit_sharing", profitSharing);
+    if (profitSharing == ProfitSharing.Y) {
+      params.add("profit_sharing", profitSharing.name());
+    }
     if (sceneInfo != null) {
       params.add("scene_info", "{\"store_info\":" + SerializeUtil.beanToJson(sceneInfo) + "}");
     }
@@ -289,7 +388,9 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
    *
    * @param appId
    * @param mchId
+   * @param subAppId
    * @param subMchId
+   * @param subOpenId
    * @param body
    * @param outTradeNo
    * @param totalFee
@@ -297,10 +398,12 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
    * @param notifyUrl
    * @param tradeType
    */
-  public UnifiedOrderRequest(String appId, String mchId, String subMchId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String notifyUrl, TradeType tradeType) {
+  public UnifiedOrderRequest(String appId, String mchId, String subAppId, String subMchId, String subOpenId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String notifyUrl, TradeType tradeType) {
     this.appId = appId;
     this.mchId = mchId;
+    this.subAppId = subAppId;
     this.subMchId = subMchId;
+    this.subOpenId = subOpenId;
     this.body = body;
     this.outTradeNo = outTradeNo;
     this.totalFee = totalFee;
@@ -314,6 +417,7 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
    *
    * @param appId
    * @param mchId
+   * @param openId
    * @param body
    * @param outTradeNo
    * @param totalFee
@@ -321,14 +425,45 @@ public class UnifiedOrderRequest extends ApiRequest<UnifiedOrderResponse> {
    * @param notifyUrl
    * @param tradeType
    */
-  public UnifiedOrderRequest(String appId, String mchId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String notifyUrl, TradeType tradeType) {
+  public UnifiedOrderRequest(String appId, String mchId, String openId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String notifyUrl, TradeType tradeType) {
     this.appId = appId;
     this.mchId = mchId;
+    this.openId = openId;
     this.body = body;
     this.outTradeNo = outTradeNo;
     this.totalFee = totalFee;
     this.spbillCreateIp = spbillCreateIp;
     this.notifyUrl = notifyUrl;
     this.tradeType = tradeType;
+  }
+
+  @Override
+  public String toString() {
+    return "UnifiedOrderRequest{" +
+            "appId='" + appId + '\'' +
+            ", mchId='" + mchId + '\'' +
+            ", subAppId='" + subAppId + '\'' +
+            ", subMchId='" + subMchId + '\'' +
+            ", deviceInfo='" + deviceInfo + '\'' +
+            ", signType=" + signType +
+            ", body='" + body + '\'' +
+            ", detail='" + detail + '\'' +
+            ", attach='" + attach + '\'' +
+            ", outTradeNo='" + outTradeNo + '\'' +
+            ", feeType=" + feeType +
+            ", totalFee=" + totalFee +
+            ", spbillCreateIp='" + spbillCreateIp + '\'' +
+            ", timeStart='" + timeStart + '\'' +
+            ", timeExpire='" + timeExpire + '\'' +
+            ", goodsTag='" + goodsTag + '\'' +
+            ", notifyUrl='" + notifyUrl + '\'' +
+            ", tradeType=" + tradeType +
+            ", limitPay='" + limitPay + '\'' +
+            ", openId='" + openId + '\'' +
+            ", subOpenId='" + subOpenId + '\'' +
+            ", receipt='" + receipt + '\'' +
+            ", profitSharing='" + profitSharing + '\'' +
+            ", sceneInfo=" + sceneInfo +
+            "} " + super.toString();
   }
 }

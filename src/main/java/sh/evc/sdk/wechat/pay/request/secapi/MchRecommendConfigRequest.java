@@ -85,7 +85,7 @@ public class MchRecommendConfigRequest extends ApiRequest<MchRecommendConfigResp
     params.add("sub_appid", subAppId);
     params.add("subscribe_appid", subscribeAppId);
     params.add("receipt_appid", receiptAppId);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

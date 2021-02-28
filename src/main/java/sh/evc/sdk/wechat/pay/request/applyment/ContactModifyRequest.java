@@ -102,7 +102,7 @@ public class ContactModifyRequest extends ApiRequest<ContactModifyResponse> {
     params.add("email", email);
     params.add("merchant_name", merchantName);
     params.add("cert_sn", certSn);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

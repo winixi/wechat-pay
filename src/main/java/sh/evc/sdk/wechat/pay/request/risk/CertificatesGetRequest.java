@@ -31,7 +31,7 @@ public class CertificatesGetRequest extends ApiRequest<CertificatesGetResponse> 
   public ParamsMap getEntityParams() {
     ParamsMap params = new ParamsMap();
     params.add("mch_id", mchId);
-    params.add("sign_type", signType.getName());
+    params.add("sign_type", signType.getValue());
     return params;
   }
 

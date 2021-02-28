@@ -36,6 +36,10 @@ public class PayClient {
     this.handler = handler;
   }
 
+  public PayConfig getConfig() {
+    return config;
+  }
+
   /**
    * 执行请求
    *

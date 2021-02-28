@@ -170,7 +170,7 @@ public class SignatureUtil {
 
     //如果指定了签名方式，那么就用指定的方式
     if (respData.containsKey(Const.FIELD_SIGN_TYPE)) {
-      signType = SignType.find(respData.get(Const.FIELD_SIGN_TYPE));
+      signType = SignType.getByValue(respData.get(Const.FIELD_SIGN_TYPE));
     }
 
     return generate(respData, key, signType).equals(sign);
@@ -214,7 +214,7 @@ public class SignatureUtil {
     //如果指名了签名方式就按指明的定
     String type = data.get("sign_type");
     if (type != null) {
-      signType = SignType.find(type);
+      signType = SignType.getByValue(type);
     }
 
     try {

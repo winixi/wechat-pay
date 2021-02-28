@@ -8,13 +8,20 @@ package sh.evc.sdk.wechat.pay.dict;
  */
 public enum SignType {
 
+  /**
+   * md5
+   */
   MD5("MD5"),
+
+  /**
+   * sha256
+   */
   HMACSHA256("HMAC-SHA256");
 
-  private String name;
+  private String value;
 
-  SignType(String name) {
-    this.name = name;
+  SignType(String value) {
+    this.value = value;
   }
 
   /**
@@ -23,20 +30,20 @@ public enum SignType {
    * @param name
    * @return
    */
-  public static SignType find(String name) {
+  public static SignType getByValue(String name) {
     for (SignType signType : SignType.values()) {
-      if (signType.getName().equals(name)) {
+      if (signType.getValue().equals(name)) {
         return signType;
       }
     }
     return null;
   }
 
-  public String getName() {
-    return name;
+  public String getValue() {
+    return value;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setValue(String value) {
+    this.value = value;
   }
 }

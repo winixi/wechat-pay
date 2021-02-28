@@ -69,25 +69,118 @@ public class TransferSendRequest extends ApiRequest<TransferSendResponse> {
    */
   private String spbillCreateIp;
 
+  public String getMchAppId() {
+    return mchAppId;
+  }
+
+  public void setMchAppId(String mchAppId) {
+    this.mchAppId = mchAppId;
+  }
+
+  public String getMchId() {
+    return mchId;
+  }
+
+  public void setMchId(String mchId) {
+    this.mchId = mchId;
+  }
+
+  public String getDeviceInfo() {
+    return deviceInfo;
+  }
+
+  public String getPartnerTradeNo() {
+    return partnerTradeNo;
+  }
+
+  public void setPartnerTradeNo(String partnerTradeNo) {
+    this.partnerTradeNo = partnerTradeNo;
+  }
+
+  public String getOpenId() {
+    return openId;
+  }
+
+  public void setOpenId(String openId) {
+    this.openId = openId;
+  }
+
+  public CheckName getCheckName() {
+    return checkName;
+  }
+
+  public void setCheckName(CheckName checkName) {
+    this.checkName = checkName;
+  }
+
+  public String getReUserName() {
+    return reUserName;
+  }
+
+  public Integer getAmount() {
+    return amount;
+  }
+
+  public void setAmount(Integer amount) {
+    this.amount = amount;
+  }
+
+  public String getDesc() {
+    return desc;
+  }
+
+  public void setDesc(String desc) {
+    this.desc = desc;
+  }
+
+  public String getSpbillCreateIp() {
+    return spbillCreateIp;
+  }
+
   /**
-   * 构造
+   * 要检查用户真实姓名
    *
    * @param mchAppId
    * @param mchId
    * @param partnerTradeNo
    * @param openId
-   * @param checkName
+   * @param reUserName
+   * @param spbillCreateIp
    * @param amount
    * @param desc
    */
-  public TransferSendRequest(String mchAppId, String mchId, String partnerTradeNo, String openId, CheckName checkName, Integer amount, String desc) {
+  public TransferSendRequest(String mchAppId, String mchId, String partnerTradeNo, String openId, String reUserName, String spbillCreateIp, Integer amount, String desc) {
     this.mchAppId = mchAppId;
     this.mchId = mchId;
     this.partnerTradeNo = partnerTradeNo;
     this.openId = openId;
-    this.checkName = checkName;
+    this.reUserName = reUserName;
+    this.spbillCreateIp = spbillCreateIp;
     this.amount = amount;
     this.desc = desc;
+    this.checkName = CheckName.FORCE_CHECK;
+  }
+
+  /**
+   * 不检查用户真实姓名
+   *
+   * @param mchAppId
+   * @param mchId
+   * @param partnerTradeNo
+   * @param openId
+   * @param spbillCreateIp
+   * @param amount
+   * @param desc
+   */
+  public TransferSendRequest(String mchAppId, String mchId, String partnerTradeNo, String openId, String spbillCreateIp, Integer amount, String desc) {
+    this.mchAppId = mchAppId;
+    this.mchId = mchId;
+    this.partnerTradeNo = partnerTradeNo;
+    this.openId = openId;
+    this.spbillCreateIp = spbillCreateIp;
+    this.amount = amount;
+    this.desc = desc;
+    this.checkName = CheckName.NO_CHECK;
   }
 
   public void setDeviceInfo(String deviceInfo) {
@@ -126,5 +219,21 @@ public class TransferSendRequest extends ApiRequest<TransferSendResponse> {
   @Override
   public Class<TransferSendResponse> getResponseClass() {
     return TransferSendResponse.class;
+  }
+
+  @Override
+  public String toString() {
+    return "TransferSendRequest{" +
+            "mchAppId='" + mchAppId + '\'' +
+            ", mchId='" + mchId + '\'' +
+            ", deviceInfo='" + deviceInfo + '\'' +
+            ", partnerTradeNo='" + partnerTradeNo + '\'' +
+            ", openId='" + openId + '\'' +
+            ", checkName=" + checkName +
+            ", reUserName='" + reUserName + '\'' +
+            ", amount=" + amount +
+            ", desc='" + desc + '\'' +
+            ", spbillCreateIp='" + spbillCreateIp + '\'' +
+            "} " + super.toString();
   }
 }
