@@ -41,14 +41,14 @@ public class SubmitStateRequest extends ApiRequest<SubmitStateResponse> {
   private SignType signType = SignType.HMACSHA256;
 
   /**
-   * 必填
+   * 构造
    *
    * @param mchId
-   * @param applymentId
+   * @param businessCode
    */
-  public SubmitStateRequest(String mchId, String applymentId) {
+  public SubmitStateRequest(String mchId, String businessCode) {
     this.mchId = mchId;
-    this.applymentId = applymentId;
+    this.businessCode = businessCode;
   }
 
   public void setMchId(String mchId) {
@@ -82,5 +82,44 @@ public class SubmitStateRequest extends ApiRequest<SubmitStateResponse> {
   @Override
   public Class<SubmitStateResponse> getResponseClass() {
     return SubmitStateResponse.class;
+  }
+
+  public String getVersion() {
+    return version;
+  }
+
+  public void setVersion(String version) {
+    this.version = version;
+  }
+
+  public String getMchId() {
+    return mchId;
+  }
+
+  public String getApplymentId() {
+    return applymentId;
+  }
+
+  public String getBusinessCode() {
+    return businessCode;
+  }
+
+  public SignType getSignType() {
+    return signType;
+  }
+
+  public void setSignType(SignType signType) {
+    this.signType = signType;
+  }
+
+  @Override
+  public String toString() {
+    return "SubmitStateRequest{" +
+            "version='" + version + '\'' +
+            ", mchId='" + mchId + '\'' +
+            ", applymentId='" + applymentId + '\'' +
+            ", businessCode='" + businessCode + '\'' +
+            ", signType=" + signType +
+            "} " + super.toString();
   }
 }

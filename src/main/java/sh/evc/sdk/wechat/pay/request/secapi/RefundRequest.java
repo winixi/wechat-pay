@@ -132,6 +132,58 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
     this.notifyUrl = notifyUrl;
   }
 
+  public String getAppId() {
+    return appId;
+  }
+
+  public String getSubAppId() {
+    return subAppId;
+  }
+
+  public String getMchId() {
+    return mchId;
+  }
+
+  public String getSubMchId() {
+    return subMchId;
+  }
+
+  public String getTransactionId() {
+    return transactionId;
+  }
+
+  public String getOutTradeNo() {
+    return outTradeNo;
+  }
+
+  public String getOutRefundNo() {
+    return outRefundNo;
+  }
+
+  public Integer getTotalFee() {
+    return totalFee;
+  }
+
+  public Integer getRefundFee() {
+    return refundFee;
+  }
+
+  public FeeType getRefundFeeType() {
+    return refundFeeType;
+  }
+
+  public String getRefundDesc() {
+    return refundDesc;
+  }
+
+  public SignType getSignType() {
+    return signType;
+  }
+
+  public String getNotifyUrl() {
+    return notifyUrl;
+  }
+
   /**
    * 服务商子商户退款
    *

@@ -1,5 +1,6 @@
 package sh.evc.sdk.wechat.pay;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -15,11 +16,15 @@ import sh.evc.sdk.wechat.pay.request.pay.OrderQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.ProfitSharingMerchantRatioQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.UnifiedOrderRequest;
 import sh.evc.sdk.wechat.pay.request.risk.CertificatesGetRequest;
+import sh.evc.sdk.wechat.pay.request.secapi.MchConfigAppIdRequest;
+import sh.evc.sdk.wechat.pay.request.secapi.MchRecommendConfigRequest;
 import sh.evc.sdk.wechat.pay.request.secapi.MediaUploadRequest;
 import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.ProfitSharingMerchantRatioQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.UnifiedOrderResponse;
 import sh.evc.sdk.wechat.pay.response.risk.CertificatesGetResponse;
+import sh.evc.sdk.wechat.pay.response.secapi.MchConfigAppIdResponse;
+import sh.evc.sdk.wechat.pay.response.secapi.MchRecommendConfigResponse;
 import sh.evc.sdk.wechat.pay.response.secapi.MediaUploadResponse;
 import sh.evc.sdk.wechat.pay.util.JsonFormat;
 import sh.evc.sdk.wechat.pay.util.NonceStrUtil;
@@ -110,4 +115,38 @@ public class ServicePayClientTest {
     MediaUploadResponse response = client.execute(request);
     JsonFormat.print(response);
   }
+
+  /**
+   * 这个接口已经无效
+   */
+  @Test
+  public void mchRecommendConfig() {
+    String subMchId = "1536473831"; //金盒软件
+    String mchId = config.getMchId();
+    String subAppId = config.getSubAppId();
+    String subscribeAppId = config.getSubscribeAppId();
+    MchRecommendConfigRequest request = new MchRecommendConfigRequest(mchId, subAppId, subMchId, subscribeAppId);
+    MchRecommendConfigResponse response = client.execute(request);
+    if (!response.isSuccess()) {
+      log.error("支付后推荐关注配置失败 req:{} resp:{}", request.toString(), response.toString());
+      return;
+    }
+    Assert.assertNotNull(response.toString());
+  }
+
+  @Test
+  public void mchConfigAppId() {
+    String subMchId = "1536473831"; //金盒软件
+    String mchId = config.getMchId();
+    String appId = config.getAppId();
+    String subAppId = config.getSubAppId();
+    MchConfigAppIdRequest request = new MchConfigAppIdRequest(appId,  mchId,  subMchId,  subAppId);
+    MchConfigAppIdResponse response = client.execute(request);
+    if (!response.isSuccess()) {
+      log.error("商户号绑定appId失败 req:{} resp:{}", request.toString(), response.toString());
+      return;
+    }
+    Assert.assertNotNull(response.toString());
+  }
+
 }

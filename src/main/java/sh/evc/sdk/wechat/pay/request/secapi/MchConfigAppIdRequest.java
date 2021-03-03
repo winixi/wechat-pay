@@ -88,4 +88,9 @@ public class MchConfigAppIdRequest extends ApiRequest<MchConfigAppIdResponse> {
   public Class<MchConfigAppIdResponse> getResponseClass() {
     return MchConfigAppIdResponse.class;
   }
+
+  @Override
+  public boolean useCert() {
+    return true;
+  }
 }

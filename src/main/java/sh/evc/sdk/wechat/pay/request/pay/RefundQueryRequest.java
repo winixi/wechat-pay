@@ -66,7 +66,7 @@ public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
   private SignType signType = SignType.MD5;
 
   /**
-   *
+   * 服务商子商户查询
    *
    * @param appId
    * @param mchId
@@ -80,6 +80,21 @@ public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
     this.mchId = mchId;
     this.subAppId = subAppId;
     this.subMchId = subMchId;
+    this.outTradeNo = outTradeNo;
+    this.outRefundNo = outRefundNo;
+  }
+
+  /**
+   * 普通商户查询
+   *
+   * @param appId
+   * @param mchId
+   * @param outTradeNo
+   * @param outRefundNo
+   */
+  public RefundQueryRequest(String appId, String mchId, String outTradeNo, String outRefundNo) {
+    this.appId = appId;
+    this.mchId = mchId;
     this.outTradeNo = outTradeNo;
     this.outRefundNo = outRefundNo;
   }

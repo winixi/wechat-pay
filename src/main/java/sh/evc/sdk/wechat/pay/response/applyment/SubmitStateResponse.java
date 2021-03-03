@@ -112,13 +112,17 @@ public class SubmitStateResponse extends XmlResponse {
     this.signUrl = signUrl;
   }
 
-  public List<AuditDetail> getAuditDetail() {
-    return SerializeUtil.jsonToBean(auditDetail, new TypeReference<List<AuditDetail>>() {
-    });
+  public String getAuditDetail() {
+    return auditDetail;
   }
 
   public void setAuditDetail(String auditDetail) {
     this.auditDetail = auditDetail;
+  }
+
+  public List<AuditDetail> getAuditDetailList() {
+    return SerializeUtil.jsonToBean(auditDetail, new TypeReference<List<AuditDetail>>() {
+    });
   }
 
   @Override

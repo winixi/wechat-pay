@@ -51,10 +51,11 @@ public class MchRecommendConfigRequest extends ApiRequest<MchRecommendConfigResp
    * @param subMchId
    * @param receiptAppId
    */
-  public MchRecommendConfigRequest(String mchId, String subMchId, String receiptAppId) {
+  public MchRecommendConfigRequest(String mchId, String subAppId, String subMchId, String subscribeAppId) {
     this.mchId = mchId;
+    this.subAppId = subAppId;
     this.subMchId = subMchId;
-    this.receiptAppId = receiptAppId;
+    this.subscribeAppId = subscribeAppId;
   }
 
   public void setMchId(String mchId) {
@@ -97,5 +98,50 @@ public class MchRecommendConfigRequest extends ApiRequest<MchRecommendConfigResp
   @Override
   public Class<MchRecommendConfigResponse> getResponseClass() {
     return MchRecommendConfigResponse.class;
+  }
+
+  @Override
+  public boolean useCert() {
+    return true;
+  }
+
+  public String getMchId() {
+    return mchId;
+  }
+
+  public String getSubMchId() {
+    return subMchId;
+  }
+
+  public String getSubAppId() {
+    return subAppId;
+  }
+
+  public String getSubscribeAppId() {
+    return subscribeAppId;
+  }
+
+  public String getReceiptAppId() {
+    return receiptAppId;
+  }
+
+  public SignType getSignType() {
+    return signType;
+  }
+
+  public void setSignType(SignType signType) {
+    this.signType = signType;
+  }
+
+  @Override
+  public String toString() {
+    return "MchRecommendConfigRequest{" +
+            "mchId='" + mchId + '\'' +
+            ", subMchId='" + subMchId + '\'' +
+            ", subAppId='" + subAppId + '\'' +
+            ", subscribeAppId='" + subscribeAppId + '\'' +
+            ", receiptAppId='" + receiptAppId + '\'' +
+            ", signType=" + signType +
+            "} " + super.toString();
   }
 }

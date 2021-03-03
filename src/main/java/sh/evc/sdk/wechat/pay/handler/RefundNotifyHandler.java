@@ -1,5 +1,6 @@
 package sh.evc.sdk.wechat.pay.handler;
 
+import sh.evc.sdk.wechat.pay.domain.RefundInfo;
 import sh.evc.sdk.wechat.pay.domain.RefundNotify;
 
 /**
@@ -15,5 +16,5 @@ public interface RefundNotifyHandler {
    *
    * @param refundNotice
    */
-  void process(RefundNotify refundNotice);
+  void process(RefundNotify refundNotify, RefundInfo refundInfo);
 }

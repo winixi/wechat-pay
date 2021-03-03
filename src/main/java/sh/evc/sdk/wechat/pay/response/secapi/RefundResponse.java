@@ -76,6 +76,11 @@ public class RefundResponse extends XmlResponse {
   private Integer settlementRefundFee;
 
   /**
+   * 应结订单金额=订单金额-免充值代金券金额，应结订单金额<=订单金额
+   */
+  private Integer totalFee;
+
+  /**
    * 货币种类
    */
   private FeeType feeType;
@@ -278,6 +283,14 @@ public class RefundResponse extends XmlResponse {
     this.couponRefundFee0 = couponRefundFee0;
   }
 
+  public Integer getTotalFee() {
+    return totalFee;
+  }
+
+  public void setTotalFee(Integer totalFee) {
+    this.totalFee = totalFee;
+  }
+
   @Override
   public String toString() {
     return "RefundResponse{" +
@@ -293,6 +306,7 @@ public class RefundResponse extends XmlResponse {
             ", refundId='" + refundId + '\'' +
             ", refundFee=" + refundFee +
             ", settlementRefundFee=" + settlementRefundFee +
+            ", totalFee=" + totalFee +
             ", feeType=" + feeType +
             ", cashFee=" + cashFee +
             ", cashRefundFee=" + cashRefundFee +

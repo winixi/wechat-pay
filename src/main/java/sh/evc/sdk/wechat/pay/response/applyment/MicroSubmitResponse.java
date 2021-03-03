@@ -1,6 +1,6 @@
 package sh.evc.sdk.wechat.pay.response.applyment;
 
-import sh.evc.sdk.wechat.pay.response.ApiResponse;
+import sh.evc.sdk.wechat.pay.response.XmlResponse;
 
 /**
  * 小微商户入驻
@@ -8,7 +8,7 @@ import sh.evc.sdk.wechat.pay.response.ApiResponse;
  * @author winixi
  * @date 2021/1/21 3:44 PM
  */
-public class MicroSubmitResponse extends ApiResponse {
+public class MicroSubmitResponse extends XmlResponse {
 
   /**
    * 随机字符串

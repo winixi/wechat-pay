@@ -29,4 +29,17 @@ public interface ServicePayConfig extends PayConfig {
    */
   String getProfitNotify();
 
+  /**
+   * 获取订阅服务号appId
+   *
+   * @return
+   */
+  String getSubscribeAppId();
+
+  /**
+   * 商户费率
+   *
+   * @return
+   */
+  String getFeeRate();
 }

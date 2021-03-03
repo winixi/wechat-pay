@@ -11,40 +11,54 @@ public enum ApplymentState {
   /**
    * 审核中
    */
-  AUDITING,
+  AUDITING("审核中"),
 
   /**
    * 已驳回
    */
-  REJECTED,
+  REJECTED("已驳回"),
 
   /**
    * 已冻结
    */
-  FROZEN,
+  FROZEN("已冻结"),
 
   /**
    * 待签约
    */
-  TO_BE_SIGNED,
+  TO_BE_SIGNED("待签约"),
 
   /**
    * 完成
    */
-  FINISH,
+  FINISH("完成"),
 
   /**
    * 资料校验中
    */
-  CHECKING,
+  CHECKING("资料校验中"),
 
   /**
    * 待账户验证
    */
-  ACCOUNT_NEED_VERIFY,
+  ACCOUNT_NEED_VERIFY("待账户验证"),
 
   /**
    * 待签约
    */
-  NEED_SIGN,
+  NEED_SIGN("待签约");
+
+  private String value;
+
+  ApplymentState(String value) {
+    this.value = value;
+  }
+
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
+  }
 }

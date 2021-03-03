@@ -28,6 +28,8 @@ public class TestServicePayConfig implements ServicePayConfig {
   private String payNotify;
   private String refundNotify;
   private String profitNotify;
+  private String subscribeAppId;
+  private String feeRate;
 
   public TestServicePayConfig() {
     InputStream in = this.getClass().getResourceAsStream("/service.properties");
@@ -44,7 +46,8 @@ public class TestServicePayConfig implements ServicePayConfig {
       payNotify = props.getProperty("payNotify");
       refundNotify = props.getProperty("refundNotify");
       profitNotify = props.getProperty("profitNotify");
-
+      subscribeAppId = props.getProperty("subscribeAppId");
+      feeRate = props.getProperty("feeRate");
     } catch (IOException e) {
       logger.error("读取配置错误", e);
     }
@@ -98,5 +101,32 @@ public class TestServicePayConfig implements ServicePayConfig {
   @Override
   public String getProfitNotify() {
     return profitNotify;
+  }
+
+  @Override
+  public String getSubscribeAppId() {
+    return subscribeAppId;
+  }
+
+  @Override
+  public String getFeeRate() {
+    return feeRate;
+  }
+
+  @Override
+  public String toString() {
+    return "TestServicePayConfig{" +
+            "appId='" + appId + '\'' +
+            ", subAppId='" + subAppId + '\'' +
+            ", apiKey='" + apiKey + '\'' +
+            ", aesKey='" + aesKey + '\'' +
+            ", certPath='" + certPath + '\'' +
+            ", mchId='" + mchId + '\'' +
+            ", payNotify='" + payNotify + '\'' +
+            ", refundNotify='" + refundNotify + '\'' +
+            ", profitNotify='" + profitNotify + '\'' +
+            ", subscribeAppId='" + subscribeAppId + '\'' +
+            ", feeRate='" + feeRate + '\'' +
+            '}';
   }
 }

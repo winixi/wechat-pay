@@ -7,6 +7,8 @@ import sh.evc.sdk.wechat.pay.util.ParamsMap;
 import sh.evc.sdk.wechat.pay.util.RsaEncryptUtil;
 import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 
+import java.util.Arrays;
+
 /**
  * 小微商户入驻
  * https://pay.weixin.qq.com/wiki/doc/api/xiaowei.php?chapter=19_2
@@ -236,6 +238,60 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
     this.cert = cert;
   }
 
+  @Override
+  public ParamsMap getEntityParams() {
+    ParamsMap params = new ParamsMap();
+    params.add("version", version);
+    params.add("mch_id", mchId);
+    params.add("cert_sn", certSn);
+    params.add("business_code", businessCode);
+    params.add("id_card_copy", idCardCopy);
+    params.add("id_card_national", idCardNational);
+    params.add("id_card_name", RsaEncryptUtil.rsaEncrypt(idCardName, cert));
+    params.add("id_card_number", RsaEncryptUtil.rsaEncrypt(idCardNumber, cert));
+    params.add("id_card_valid_time", idCardValidTime);
+    params.add("account_name", RsaEncryptUtil.rsaEncrypt(accountName, cert));
+    params.add("account_bank", accountBank);
+    params.add("bank_address_code", bankAddressCode);
+    params.add("bank_name", bankName);
+    params.add("account_number", RsaEncryptUtil.rsaEncrypt(accountNumber, cert));
+    params.add("store_name", storeName);
+    params.add("store_address_code", storeAddressCode);
+    params.add("store_street", storeStreet);
+    params.add("store_longitude", storeLongitude);
+    params.add("store_latitude", storeLatitude);
+    params.add("store_entrance_pic", storeEntrancePic);
+    params.add("indoor_pic", indoorPic);
+    params.add("address_certification", addressCertification);
+    params.add("merchant_shortname", merchantShortname);
+    params.add("service_phone", servicePhone);
+    params.add("product_desc", productDesc);
+    params.add("rate", rate);
+    params.add("business_addition_desc", businessAdditionDesc);
+    params.add("business_addition_pics", SerializeUtil.beanToJson(businessAdditionPics));
+    params.add("contact", RsaEncryptUtil.rsaEncrypt(contact, cert));
+    params.add("contact_phone", RsaEncryptUtil.rsaEncrypt(contactPhone, cert));
+    params.add("contact_email", RsaEncryptUtil.rsaEncrypt(contactEmail, cert));
+    params.add("sign_type", signType.getValue());
+    return params;
+  }
+
+  @Override
+  public String getUri() {
+    return "/applyment/micro/submit";
+  }
+
+  @Override
+  public Class<MicroSubmitResponse> getResponseClass() {
+    return MicroSubmitResponse.class;
+  }
+
+  @Override
+  public boolean useCert() {
+    return true;
+  }
+
+
   public void setCertSn(String certSn) {
     this.certSn = certSn;
   }
@@ -360,57 +416,184 @@ public class MicroSubmitRequest extends ApiRequest<MicroSubmitResponse> {
     this.cert = cert;
   }
 
-  @Override
-  public ParamsMap getEntityParams() {
-    ParamsMap params = new ParamsMap();
-    params.add("version", version);
-    params.add("mch_id", mchId);
-    params.add("cert_sn", certSn);
-    params.add("business_code", businessCode);
-    params.add("id_card_copy", idCardCopy);
-    params.add("id_card_national", idCardNational);
-    params.add("id_card_name", RsaEncryptUtil.rsaEncrypt(idCardName, cert));
-    params.add("id_card_number", RsaEncryptUtil.rsaEncrypt(idCardNumber, cert));
-    params.add("id_card_valid_time", idCardValidTime);
-    params.add("account_name", RsaEncryptUtil.rsaEncrypt(accountName, cert));
-    params.add("account_bank", accountBank);
-    params.add("bank_address_code", bankAddressCode);
-    params.add("bank_name", bankName);
-    params.add("account_number", RsaEncryptUtil.rsaEncrypt(accountNumber, cert));
-    params.add("store_name", storeName);
-    params.add("store_address_code", storeAddressCode);
-    params.add("store_street", storeStreet);
-    params.add("store_longitude", storeLongitude);
-    params.add("store_latitude", storeLatitude);
-    params.add("store_entrance_pic", storeEntrancePic);
-    params.add("indoor_pic", indoorPic);
-    params.add("address_certification", addressCertification);
-    params.add("merchant_shortname", merchantShortname);
-    params.add("service_phone", servicePhone);
-    params.add("product_desc", productDesc);
-    params.add("rate", rate);
-    params.add("business_addition_desc", businessAdditionDesc);
-    params.add("business_addition_pics", SerializeUtil.beanToJson(businessAdditionPics));
-    params.add("contact", RsaEncryptUtil.rsaEncrypt(contact, cert));
-    params.add("contact_phone", RsaEncryptUtil.rsaEncrypt(contactPhone, cert));
-    params.add("contact_email", RsaEncryptUtil.rsaEncrypt(contactEmail, cert));
-    params.add("sign_type", signType.getValue());
-    return params;
+
+  public String getVersion() {
+    return version;
+  }
+
+  public void setVersion(String version) {
+    this.version = version;
+  }
+
+  public String getCertSn() {
+    return certSn;
+  }
+
+  public String getMchId() {
+    return mchId;
+  }
+
+  public String getBusinessCode() {
+    return businessCode;
+  }
+
+  public String getIdCardCopy() {
+    return idCardCopy;
+  }
+
+  public String getIdCardNational() {
+    return idCardNational;
+  }
+
+  public String getIdCardName() {
+    return idCardName;
+  }
+
+  public String getIdCardNumber() {
+    return idCardNumber;
+  }
+
+  public String getIdCardValidTime() {
+    return idCardValidTime;
+  }
+
+  public String getAccountName() {
+    return accountName;
+  }
+
+  public String getAccountBank() {
+    return accountBank;
+  }
+
+  public String getBankAddressCode() {
+    return bankAddressCode;
+  }
+
+  public String getBankName() {
+    return bankName;
+  }
+
+  public String getAccountNumber() {
+    return accountNumber;
+  }
+
+  public String getStoreName() {
+    return storeName;
+  }
+
+  public String getStoreAddressCode() {
+    return storeAddressCode;
+  }
+
+  public String getStoreStreet() {
+    return storeStreet;
+  }
+
+  public String getStoreLongitude() {
+    return storeLongitude;
+  }
+
+  public String getStoreLatitude() {
+    return storeLatitude;
+  }
+
+  public String getStoreEntrancePic() {
+    return storeEntrancePic;
+  }
+
+  public String getIndoorPic() {
+    return indoorPic;
+  }
+
+  public String getAddressCertification() {
+    return addressCertification;
+  }
+
+  public String getMerchantShortname() {
+    return merchantShortname;
+  }
+
+  public String getServicePhone() {
+    return servicePhone;
+  }
+
+  public String getProductDesc() {
+    return productDesc;
+  }
+
+  public String getRate() {
+    return rate;
+  }
+
+  public String getBusinessAdditionDesc() {
+    return businessAdditionDesc;
+  }
+
+  public String[] getBusinessAdditionPics() {
+    return businessAdditionPics;
+  }
+
+  public String getContact() {
+    return contact;
+  }
+
+  public String getContactPhone() {
+    return contactPhone;
+  }
+
+  public String getContactEmail() {
+    return contactEmail;
+  }
+
+  public SignType getSignType() {
+    return signType;
+  }
+
+  public void setSignType(SignType signType) {
+    this.signType = signType;
+  }
+
+  public String getCert() {
+    return cert;
   }
 
   @Override
-  public String getUri() {
-    return "/applyment/micro/submit";
-  }
-
-  @Override
-  public Class<MicroSubmitResponse> getResponseClass() {
-    return MicroSubmitResponse.class;
-  }
-
-  @Override
-  public boolean useCert() {
-    return true;
+  public String toString() {
+    return "MicroSubmitRequest{" +
+            "version='" + version + '\'' +
+            ", certSn='" + certSn + '\'' +
+            ", mchId='" + mchId + '\'' +
+            ", businessCode='" + businessCode + '\'' +
+            ", idCardCopy='" + idCardCopy + '\'' +
+            ", idCardNational='" + idCardNational + '\'' +
+            ", idCardName='" + idCardName + '\'' +
+            ", idCardNumber='" + idCardNumber + '\'' +
+            ", idCardValidTime='" + idCardValidTime + '\'' +
+            ", accountName='" + accountName + '\'' +
+            ", accountBank='" + accountBank + '\'' +
+            ", bankAddressCode='" + bankAddressCode + '\'' +
+            ", bankName='" + bankName + '\'' +
+            ", accountNumber='" + accountNumber + '\'' +
+            ", storeName='" + storeName + '\'' +
+            ", storeAddressCode='" + storeAddressCode + '\'' +
+            ", storeStreet='" + storeStreet + '\'' +
+            ", storeLongitude='" + storeLongitude + '\'' +
+            ", storeLatitude='" + storeLatitude + '\'' +
+            ", storeEntrancePic='" + storeEntrancePic + '\'' +
+            ", indoorPic='" + indoorPic + '\'' +
+            ", addressCertification='" + addressCertification + '\'' +
+            ", merchantShortname='" + merchantShortname + '\'' +
+            ", servicePhone='" + servicePhone + '\'' +
+            ", productDesc='" + productDesc + '\'' +
+            ", rate='" + rate + '\'' +
+            ", businessAdditionDesc='" + businessAdditionDesc + '\'' +
+            ", businessAdditionPics=" + Arrays.toString(businessAdditionPics) +
+            ", contact='" + contact + '\'' +
+            ", contactPhone='" + contactPhone + '\'' +
+            ", contactEmail='" + contactEmail + '\'' +
+            ", signType=" + signType +
+            ", cert='" + cert + '\'' +
+            "} " + super.toString();
   }
 }
 

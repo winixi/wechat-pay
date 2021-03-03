@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import sh.evc.sdk.wechat.pay.dict.CouponType;
 import sh.evc.sdk.wechat.pay.dict.FeeType;
-import sh.evc.sdk.wechat.pay.dict.TradeState;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.response.XmlResponse;
 
@@ -80,11 +79,6 @@ public class PayNotify extends XmlResponse {
    * 交易类型
    */
   private TradeType tradeType;
-
-  /**
-   * 交易状态
-   */
-  private TradeState tradeState;
 
   /**
    * 付款银行
@@ -266,14 +260,6 @@ public class PayNotify extends XmlResponse {
     this.tradeType = tradeType;
   }
 
-  public TradeState getTradeState() {
-    return tradeState;
-  }
-
-  public void setTradeState(TradeState tradeState) {
-    this.tradeState = tradeState;
-  }
-
   public String getBankType() {
     return bankType;
   }
@@ -417,7 +403,6 @@ public class PayNotify extends XmlResponse {
             ", subOpenId='" + subOpenId + '\'' +
             ", subIsSubscribe='" + subIsSubscribe + '\'' +
             ", tradeType=" + tradeType +
-            ", tradeState=" + tradeState +
             ", bankType='" + bankType + '\'' +
             ", detail='" + detail + '\'' +
             ", totalFee=" + totalFee +

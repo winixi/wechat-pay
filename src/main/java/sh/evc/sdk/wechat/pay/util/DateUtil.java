@@ -37,6 +37,38 @@ public class DateUtil {
   }
 
   /**
+   * 转化退款成功时间
+   *
+   * @param successTime
+   * @return
+   */
+  public static Date getRefundSuccessTime(String successTime) {
+    sdf.applyPattern(Const.REFUND_SUCCESS_TIME);
+    try {
+      return sdf.parse(successTime);
+    } catch (ParseException e) {
+      logger.info("退款成功时间格式转换失败:{}", successTime);
+      return null;
+    }
+  }
+
+  /**
+   * 转化转账成功时间
+   *
+   * @param paymentTime
+   * @return
+   */
+  public static Date getTransferPaymentTime(String paymentTime) {
+    sdf.applyPattern(Const.TRANSFER_PAYMENT_TIME);
+    try {
+      return sdf.parse(paymentTime);
+    } catch (ParseException e) {
+      logger.info("付款成功时间格式转换失败:{}", paymentTime);
+      return null;
+    }
+  }
+
+  /**
    * 获取支付开始时间
    *
    * @return
