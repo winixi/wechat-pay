@@ -21,22 +21,18 @@ public class MediaUploadRequest extends ApiRequest<MediaUploadResponse> {
    * 商户号
    */
   private String mchId;
-
   /**
    * 媒体文件名
    */
   private String media;
-
   /**
    * 文件
    */
   private File file;
-
   /**
    * hash
    */
   private String mediaHash;
-
   /**
    * 签名类型
    */
@@ -55,6 +51,34 @@ public class MediaUploadRequest extends ApiRequest<MediaUploadResponse> {
 
   public String getMediaHash() {
     return mediaHash;
+  }
+
+  public String getMchId() {
+    return mchId;
+  }
+
+  public void setMchId(String mchId) {
+    this.mchId = mchId;
+  }
+
+  public String getMedia() {
+    return media;
+  }
+
+  public void setMedia(String media) {
+    this.media = media;
+  }
+
+  public void setFile(File file) {
+    this.file = file;
+  }
+
+  public void setMediaHash(String mediaHash) {
+    this.mediaHash = mediaHash;
+  }
+
+  public SignType getSignType() {
+    return signType;
   }
 
   @Override

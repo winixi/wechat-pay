@@ -53,6 +53,7 @@ public class XmlResponse extends ApiResponse {
    *
    * @return
    */
+  @Override
   public boolean isSuccess() {
     if (returnCode == ReturnCode.SUCCESS && resultCode == ResultCode.SUCCESS) {
       return true;

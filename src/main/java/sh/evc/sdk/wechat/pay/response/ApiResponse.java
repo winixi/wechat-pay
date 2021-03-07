@@ -12,7 +12,7 @@ import java.util.Map;
  * @author winixi
  * @date 2021/1/18 10:34 AM
  */
-public class ApiResponse {
+public abstract class ApiResponse {
 
   private String reqUrl;
   private RequestMethod method;
@@ -77,6 +77,13 @@ public class ApiResponse {
   public void setResponseBody(String responseBody) {
     this.responseBody = responseBody;
   }
+
+  /**
+   * 是否成功调用
+   *
+   * @return
+   */
+  public abstract boolean isSuccess();
 
   @Override
   public String toString() {
