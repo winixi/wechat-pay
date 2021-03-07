@@ -11,10 +11,7 @@ import sh.evc.sdk.wechat.pay.request.ApiRequest;
 import sh.evc.sdk.wechat.pay.response.ApiResponse;
 import sh.evc.sdk.wechat.pay.util.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Date;
 
 /**
@@ -29,7 +26,7 @@ public class PayClient {
   private final PayConfig config;
   private final ResponseHandler handler;
   private final HttpRequest request = new HttpRequest();
-  private static InputStream certStream = null;
+  private byte[] certData;
 
   public PayClient(PayConfig config, ResponseHandler handler) {
     this.config = config;
@@ -128,22 +125,36 @@ public class PayClient {
       return SerializeUtil.beanToXml(params);
     }
   }
+  
+  /**
+   * 获取商户证书内容
+   *
+   * @return 商户证书内容
+   */
+  public InputStream getCertStream() {
+    ByteArrayInputStream certBis = null;
+    try {
+      certBis = new ByteArrayInputStream(getCertData());
+    } catch (IOException e) {
+      logger.error("无法读取证书文件内容");
+    }
+    return certBis;
+  }
 
   /**
    * 获取证书内容
    *
    * @return
+   * @throws IOException
    */
-  private InputStream getCertStream() {
-    if (certStream == null) {
+  public byte[] getCertData() throws IOException {
+    if (certData == null) {
       File file = new File(config.getCertPath());
-      try {
-        certStream = new FileInputStream(file);
-      } catch (FileNotFoundException e) {
-        logger.error("无法读取证书文件{}", ErrorUtil.getStackTraceAsString(e));
-      }
+      InputStream certStream = new FileInputStream(file);
+      this.certData = new byte[(int) file.length()];
+      certStream.read(certData);
+      certStream.close();
     }
-    return certStream;
+    return certData;
   }
-
 }
