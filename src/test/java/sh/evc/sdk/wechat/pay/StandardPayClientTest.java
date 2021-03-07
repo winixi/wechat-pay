@@ -10,7 +10,9 @@ import sh.evc.sdk.wechat.pay.config.TestStandardPayConfig;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.handler.ResponseHandler;
 import sh.evc.sdk.wechat.pay.handler.TestResponseHandler;
+import sh.evc.sdk.wechat.pay.request.pay.RefundQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.UnifiedOrderRequest;
+import sh.evc.sdk.wechat.pay.response.pay.RefundQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.UnifiedOrderResponse;
 import sh.evc.sdk.wechat.pay.util.JsonFormat;
 import sh.evc.sdk.wechat.pay.util.NonceStrUtil;
@@ -47,6 +49,16 @@ public class StandardPayClientTest {
     UnifiedOrderRequest request = new UnifiedOrderRequest(appId, mchId, openId, body, outTradeNo, totalFee, spbillCreateIp, notifyUrl, TradeType.JSAPI);
 
     UnifiedOrderResponse response = client.execute(request);
+    JsonFormat.print(response);
+  }
+
+  @Test
+  public void refundQuery() {
+    String appId = config.getAppId();
+    String mchId = config.getMchId();
+    String outRefundNo = "G1U1R20190516230053665";
+    RefundQueryRequest request = new RefundQueryRequest(appId, mchId, outRefundNo);
+    RefundQueryResponse response = client.execute(request);
     JsonFormat.print(response);
   }
 

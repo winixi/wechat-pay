@@ -72,15 +72,13 @@ public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
    * @param mchId
    * @param subAppId
    * @param subMchId
-   * @param outTradeNo
    * @param outRefundNo
    */
-  public RefundQueryRequest(String appId, String mchId, String subAppId, String subMchId, String outTradeNo, String outRefundNo) {
+  public RefundQueryRequest(String appId, String mchId, String subAppId, String subMchId, String outRefundNo) {
     this.appId = appId;
     this.mchId = mchId;
     this.subAppId = subAppId;
     this.subMchId = subMchId;
-    this.outTradeNo = outTradeNo;
     this.outRefundNo = outRefundNo;
   }
 
@@ -89,13 +87,11 @@ public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
    *
    * @param appId
    * @param mchId
-   * @param outTradeNo
    * @param outRefundNo
    */
-  public RefundQueryRequest(String appId, String mchId, String outTradeNo, String outRefundNo) {
+  public RefundQueryRequest(String appId, String mchId, String outRefundNo) {
     this.appId = appId;
     this.mchId = mchId;
-    this.outTradeNo = outTradeNo;
     this.outRefundNo = outRefundNo;
   }
 
@@ -151,7 +147,9 @@ public class RefundQueryRequest extends ApiRequest<RefundQueryResponse> {
     params.add("out_refund_no", outRefundNo);
     params.add("refund_id", refundId);
     params.add("sign_type", signType.getValue());
-    params.add("offset", String.valueOf(offset));
+    if (offset != null) {
+      params.add("offset", String.valueOf(offset));
+    }
     return params;
   }
 

@@ -14,6 +14,7 @@ import sh.evc.sdk.wechat.pay.handler.ResponseHandler;
 import sh.evc.sdk.wechat.pay.handler.TestResponseHandler;
 import sh.evc.sdk.wechat.pay.request.pay.OrderQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.ProfitSharingMerchantRatioQueryRequest;
+import sh.evc.sdk.wechat.pay.request.pay.RefundQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.UnifiedOrderRequest;
 import sh.evc.sdk.wechat.pay.request.risk.CertificatesGetRequest;
 import sh.evc.sdk.wechat.pay.request.secapi.MchConfigAppIdRequest;
@@ -21,6 +22,7 @@ import sh.evc.sdk.wechat.pay.request.secapi.MchRecommendConfigRequest;
 import sh.evc.sdk.wechat.pay.request.secapi.MediaUploadRequest;
 import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.ProfitSharingMerchantRatioQueryResponse;
+import sh.evc.sdk.wechat.pay.response.pay.RefundQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.UnifiedOrderResponse;
 import sh.evc.sdk.wechat.pay.response.risk.CertificatesGetResponse;
 import sh.evc.sdk.wechat.pay.response.secapi.MchConfigAppIdResponse;
@@ -149,4 +151,15 @@ public class ServicePayClientTest {
     Assert.assertNotNull(response.toString());
   }
 
+  @Test
+  public void refundQuery() {
+    String appId = config.getAppId();
+    String mchId = config.getMchId();
+    String subAppId = config.getSubAppId();
+    String subMchId = "1541272741";
+    String outRefundNo = "G18U2102R20190823155303836";
+    RefundQueryRequest request = new RefundQueryRequest(appId, mchId, subAppId, subMchId, outRefundNo);
+    RefundQueryResponse response = client.execute(request);
+    JsonFormat.print(response);
+  }
 }
