@@ -236,4 +236,9 @@ public class TransferSendRequest extends ApiRequest<TransferSendResponse> {
             ", spbillCreateIp='" + spbillCreateIp + '\'' +
             "} " + super.toString();
   }
+
+  @Override
+  public boolean useCert() {
+    return true;
+  }
 }

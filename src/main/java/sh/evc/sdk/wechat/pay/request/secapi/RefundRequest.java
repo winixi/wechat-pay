@@ -63,7 +63,7 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
   /**
    * 货币类型
    */
-  private FeeType refundFeeType;
+  private FeeType refundFeeType = FeeType.CNY;
 
   /**
    * 退款原因
@@ -280,5 +280,10 @@ public class RefundRequest extends ApiRequest<RefundResponse> {
             ", signType=" + signType +
             ", notifyUrl='" + notifyUrl + '\'' +
             "} " + super.toString();
+  }
+
+  @Override
+  public boolean useCert() {
+    return true;
   }
 }

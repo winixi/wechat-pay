@@ -49,6 +49,11 @@ public class XmlResponse extends ApiResponse {
   private String errCodeDes;
 
   /**
+   * 当err_code为PARAM_ERROR时，返回有误的请求参数字段名
+   */
+  private String errParam;
+
+  /**
    * 业务是否成功
    *
    * @return
@@ -101,14 +106,23 @@ public class XmlResponse extends ApiResponse {
     this.errCodeDes = errCodeDes;
   }
 
+  public String getErrParam() {
+    return errParam;
+  }
+
+  public void setErrParam(String errParam) {
+    this.errParam = errParam;
+  }
+
   @Override
   public String toString() {
     return "XmlResponse{" +
-            "returnCode='" + returnCode + '\'' +
+            "returnCode=" + returnCode +
             ", returnMsg='" + returnMsg + '\'' +
-            ", resultCode='" + resultCode + '\'' +
+            ", resultCode=" + resultCode +
             ", errCode='" + errCode + '\'' +
             ", errCodeDes='" + errCodeDes + '\'' +
+            ", errParam='" + errParam + '\'' +
             "} " + super.toString();
   }
 }
