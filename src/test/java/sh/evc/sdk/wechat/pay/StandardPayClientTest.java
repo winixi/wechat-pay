@@ -10,8 +10,10 @@ import sh.evc.sdk.wechat.pay.config.TestStandardPayConfig;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.handler.ResponseHandler;
 import sh.evc.sdk.wechat.pay.handler.TestResponseHandler;
+import sh.evc.sdk.wechat.pay.request.pay.OrderQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.RefundQueryRequest;
 import sh.evc.sdk.wechat.pay.request.pay.UnifiedOrderRequest;
+import sh.evc.sdk.wechat.pay.response.pay.OrderQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.RefundQueryResponse;
 import sh.evc.sdk.wechat.pay.response.pay.UnifiedOrderResponse;
 import sh.evc.sdk.wechat.pay.util.JsonFormat;
@@ -62,4 +64,15 @@ public class StandardPayClientTest {
     JsonFormat.print(response);
   }
 
+  @Test
+  public void payQuery() {
+    String appId = config.getAppId();
+    String mchId = config.getMchId();
+//    String outTradeNo = "G215U503P20210310182802427";
+
+    String outTradeNo = "G95U1P20210315103125659";
+    OrderQueryRequest request = new OrderQueryRequest(appId, mchId, outTradeNo);
+    OrderQueryResponse response = client.execute(request);
+    JsonFormat.print(response);
+  }
 }

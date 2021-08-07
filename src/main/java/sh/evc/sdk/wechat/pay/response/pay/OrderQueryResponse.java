@@ -76,11 +76,20 @@ public class OrderQueryResponse extends XmlResponse {
 
   /**
    * 交易类型
+   * 调用接口提交的交易类型，取值如下：JSAPI，NATIVE，APP，MICROPAY
    */
   private TradeType tradeType;
 
   /**
    * 交易状态
+   * SUCCESS--支付成功
+   * REFUND--转入退款
+   * NOTPAY--未支付
+   * CLOSED--已关闭
+   * REVOKED--已撤销(刷卡支付)
+   * USERPAYING--用户支付中
+   * PAYERROR--支付失败(其他原因，如银行返回失败)
+   * ACCEPT--已接收，等待扣款
    */
   private TradeState tradeState;
 

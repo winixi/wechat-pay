@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import sh.evc.sdk.wechat.pay.dict.CouponType;
 import sh.evc.sdk.wechat.pay.dict.FeeType;
+import sh.evc.sdk.wechat.pay.dict.SignType;
 import sh.evc.sdk.wechat.pay.dict.TradeType;
 import sh.evc.sdk.wechat.pay.response.XmlResponse;
 
@@ -47,6 +48,11 @@ public class PayNotify extends XmlResponse {
    * 签名
    */
   private String sign;
+
+  /**
+   * 签名方式
+   */
+  private SignType signType;
 
   /**
    * 设备信息
@@ -388,6 +394,14 @@ public class PayNotify extends XmlResponse {
     this.timeEnd = timeEnd;
   }
 
+  public SignType getSignType() {
+    return signType;
+  }
+
+  public void setSignType(SignType signType) {
+    this.signType = signType;
+  }
+
   @Override
   public String toString() {
     return "PayNotify{" +
@@ -397,6 +411,7 @@ public class PayNotify extends XmlResponse {
             ", subMchId='" + subMchId + '\'' +
             ", nonceStr='" + nonceStr + '\'' +
             ", sign='" + sign + '\'' +
+            ", signType=" + signType +
             ", deviceInfo='" + deviceInfo + '\'' +
             ", openId='" + openId + '\'' +
             ", isSubscribe='" + isSubscribe + '\'' +
