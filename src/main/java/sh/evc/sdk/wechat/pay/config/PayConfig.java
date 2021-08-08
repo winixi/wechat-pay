@@ -8,53 +8,80 @@ package sh.evc.sdk.wechat.pay.config;
  */
 public interface PayConfig {
 
-  /**
-   * 获取主商户应用appid
-   *
-   * @return
-   */
-  String getAppId();
+	/**
+	 * 获取主商户应用appid
+	 *
+	 * @return
+	 */
+	String getAppId();
 
-  /**
-   * 获取api私钥
-   *
-   * @return
-   */
-  String getApiKey();
+	/**
+	 * 获取api私钥
+	 *
+	 * @return
+	 */
+	String getApiKey();
 
-  /**
-   * 获取对称加密密钥
-   *
-   * @return
-   */
-  String getAesKey();
+	/**
+	 * 获取对称加密密钥
+	 *
+	 * @return
+	 */
+	String getAesKey();
 
-  /**
-   * 获取证书地址
-   *
-   * @return
-   */
-  String getCertPath();
+	/**
+	 * 获取证书地址
+	 *
+	 * @return
+	 */
+	String getCertPath();
 
-  /**
-   * 获取主商户号
-   *
-   * @return
-   */
-  String getMchId();
+	/**
+	 * 获取主商户号
+	 *
+	 * @return
+	 */
+	String getMchId();
 
-  /**
-   * 支付通知
-   *
-   * @return
-   */
-  String getPayNotify();
+	/**
+	 * 支付通知
+	 *
+	 * @return
+	 */
+	String getPayNotify();
 
-  /**
-   * 退款通知
-   *
-   * @return
-   */
-  String getRefundNotify();
+	/**
+	 * 退款通知
+	 *
+	 * @return
+	 */
+	String getRefundNotify();
 
+	/**
+	 * 获取特约商户应用appid
+	 *
+	 * @return
+	 */
+	String getSubAppId();
+
+	/**
+	 * 分帐通知
+	 *
+	 * @return
+	 */
+	String getProfitNotify();
+
+	/**
+	 * 获取订阅服务号appId
+	 *
+	 * @return
+	 */
+	String getSubscribeAppId();
+
+	/**
+	 * 商户费率
+	 *
+	 * @return
+	 */
+	String getFeeRate();
 }
