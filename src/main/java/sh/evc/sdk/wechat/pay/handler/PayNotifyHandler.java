@@ -1,6 +1,6 @@
 package sh.evc.sdk.wechat.pay.handler;
 
-import sh.evc.sdk.wechat.pay.domain.PayNotify;
+import sh.evc.sdk.wechat.pay.domain.notify.PayNotify;
 
 /**
  * 微信支付回调接口

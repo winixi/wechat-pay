@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import sh.evc.sdk.wechat.pay.config.PayConfig;
 import sh.evc.sdk.wechat.pay.config.TestStandardPayConfig;
 import sh.evc.sdk.wechat.pay.domain.RefundInfo;
-import sh.evc.sdk.wechat.pay.domain.RefundNotify;
+import sh.evc.sdk.wechat.pay.domain.notify.RefundNotify;
 import sh.evc.sdk.wechat.pay.util.SerializeUtil;
 import sh.evc.sdk.wechat.pay.util.SignatureUtil;
 

@@ -1,7 +1,7 @@
 package sh.evc.sdk.wechat.pay.handler;
 
 import sh.evc.sdk.wechat.pay.domain.RefundInfo;
-import sh.evc.sdk.wechat.pay.domain.RefundNotify;
+import sh.evc.sdk.wechat.pay.domain.notify.RefundNotify;
 
 /**
  * 微信退款回调接口
