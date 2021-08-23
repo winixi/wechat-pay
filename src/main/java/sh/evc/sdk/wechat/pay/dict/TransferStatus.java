@@ -8,32 +8,22 @@ package sh.evc.sdk.wechat.pay.dict;
  */
 public enum TransferStatus {
 
-  /**
-   * 转账成功
-   */
-  SUCCESS("转账成功"),
+	UNDO("未执行"),
+	PROCESSING("处理中"),
+	SUCCESS("转账成功"),
+	FAILED("转账失败");
 
-  /**
-   * 转账失败
-   */
-  FAILED("转账失败"),
+	private String value;
 
-  /**
-   * 处理中
-   */
-  PROCESSING("处理中");
+	TransferStatus(String value) {
+		this.value = value;
+	}
 
-  private String value;
+	public String getValue() {
+		return value;
+	}
 
-  TransferStatus(String value) {
-    this.value = value;
-  }
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
-  }
+	public void setValue(String value) {
+		this.value = value;
+	}
 }
